@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Calculator</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="calculator">
+    <form action="/calculate" method="post">
+        <input type="text" name="expression" placeholder="Enter an expression" required>
+        <br>
+        <label for="x">Value of x (optional):</label>
+        <input type="number" name="x">
+        <br>
+        <button type="submit">Calculate</button>
+    </form>
+    <div class="result">
+        <h2>Result:</h2>
+        <p th:text="${result}"></p>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
