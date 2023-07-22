@@ -1,3 +1,9 @@
+let shareBtn = document.getElementById("shareBtn");
+
+shareBtn.addEventListener("click", () => {
+  shareBtn.classList.toggle("open");
+});
+
 function handleButtonClick(value) {
     const expressionLabel = document.getElementById('expressionLabel');
     const currentExpression = expressionLabel.innerText;
@@ -6,6 +12,8 @@ function handleButtonClick(value) {
         expressionLabel.innerText += value;
     } else if (value.length === 1 && /^[a-zA-Z]+$/.test(value) && currentExpression.indexOf('x') === -1) {
         expressionLabel.innerText += value + '(';
+    } else if (currentExpression.includes("Error")) {
+        clearInput();
     } else {
         expressionLabel.innerText += value;
     }
@@ -64,4 +72,10 @@ function closeModal() {
 function clearInput() {
     document.getElementById('expressionLabel').innerText = "";
     document.getElementById('resultLabel').innerText = "";
+}
+
+
+// delete this
+function showNotification(number) {
+    alert('You clicked button ' + number);
 }

@@ -5,6 +5,12 @@ body {
     height: 100vh;
 }
 
+.calculator-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .expression-field {
     margin: 10px auto;
     height: 50px;
@@ -33,16 +39,10 @@ body {
     text-align: center;
     font-family:'Courier New', Courier, monospace;
     font-size: medium;
+    margin-bottom: 20px;
 }
 
 form {
-    margin-bottom: 10px;
-}
-
-input[type="text"],
-input[type="number"] {
-    width: 100%;
-    padding: 5px;
     margin-bottom: 10px;
 }
 
@@ -110,12 +110,35 @@ h2 {
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
+    background-color: rgb(239, 239, 239);
+    margin: 35% auto;
+    padding: 10px;
     border: 1px solid #888;
     width: 300px;
+    border-radius: 12px;
+    position: relative;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.modal-content label,
+.modal-content input,
+.modal-content button {
+    display: block; 
+    margin: 10px auto;
+}
+
+.modal-content .close-btn {
+    top: 10px;
+    right: 15px;
+}
+
+#xInput {
+    height: 30px;
+    background-color: rgba(220, 220, 220, 0.521);
     border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
 }
 
 .close-btn {
@@ -130,4 +153,78 @@ h2 {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.share-btn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2em;
+  height: 2em;
+  border-radius: 100vmax;
+  border: 0;
+  font-size: 2rem;
+  background-color: rgb(177, 177, 177);
+  color: #777e77;
+  cursor: pointer;
+  transition: width 300ms ease-in-out;
+  transition-delay: 50ms;
+  z-index: 1;
+}
+
+.share-btn::before {
+  content: "x";
+  position: absolute;
+  left: 5px;
+  font-size: 2.25rem;
+  font-weight: 500;
+  font-family: "Nunito", sans-serif;
+  width: 1.5em;
+  height: 1.5em;
+  background-color: transparent;
+  color: rgb(94, 85, 85);
+  border-radius: inherit;
+  z-index: -1;
+  transition: background-color 300ms ease-in-out;
+}
+
+.social-icons {
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: calc(100% - 2em);
+  height: 100%;
+  right: 0;
+  border-radius: inherit;
+}
+
+.fa-facebook-f,
+.fa-twitter,
+.fa-instagram {
+  transform: scale(0);
+  transition: transform 300ms ease-in-out;
+}
+
+.share-icon {
+  transform: scale(1);
+  transition: transform 300ms ease-in-out;
+}
+
+.share-btn.open {
+  width: 8em;
+}
+
+.share-btn.open::before {
+  background-color: #008000;
+}
+
+.share-btn.open :is(.fa-facebook-f, .fa-twitter, .fa-instagram) {
+  transform: scale(1);
+  color: #008000;
+}
+
+.share-btn.open .share-icon {
+  transform: scale(0);
 }
