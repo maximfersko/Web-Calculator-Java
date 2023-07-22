@@ -33,8 +33,8 @@ body {
     padding: 20px;
     border: 0.7px solid #ccc;
     border-radius: 20px;
-    -webkit-box-shadow: 7px 11px 46px 15px rgba(136, 145, 152, 0.22); 
-    -moz-box-shadow: 7px 11px 46px 15px rgba(136, 145, 152, 0.22); 
+    -webkit-box-shadow: 7px 11px 46px 15px rgba(136, 145, 152, 0.22);
+    -moz-box-shadow: 7px 11px 46px 15px rgba(136, 145, 152, 0.22);
     box-shadow: 7px 11px 46px 15px rgba(136, 145, 152, 0.22);
     text-align: center;
     font-family:'Courier New', Courier, monospace;
@@ -121,10 +121,8 @@ h2 {
     font-family: 'Courier New', Courier, monospace;
 }
 
-.modal-content label,
-.modal-content input,
-.modal-content button {
-    display: block; 
+.modal-content label, .modal-content input, .modal-content button {
+    display: block;
     margin: 10px auto;
 }
 
@@ -148,8 +146,7 @@ h2 {
     font-weight: bold;
 }
 
-.close-btn:hover,
-.close-btn:focus {
+.close-btn:hover, .close-btn:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
@@ -171,9 +168,9 @@ h2 {
     transition: width 300ms ease-in-out;
     transition-delay: 50ms;
     z-index: 1;
-  }
+}
 
-  .share-btn::before {
+.share-btn::before {
     content: "x";
     position: absolute;
     left: 5px;
@@ -187,9 +184,9 @@ h2 {
     border-radius: inherit;
     z-index: -1;
     transition: background-color 300ms ease-in-out;
-  }
-  
-  .social-icons {
+}
+
+.social-icons {
     position: absolute;
     display: flex;
     justify-content: space-around;
@@ -198,33 +195,31 @@ h2 {
     height: 100%;
     right: 0;
     border-radius: inherit;
-  }
-  
-  .fa-facebook-f,
-  .fa-twitter,
-  .fa-instagram {
+}
+
+.fa-facebook-f, .fa-twitter, .fa-instagram {
     transform: scale(0);
     transition: transform 300ms ease-in-out;
-  }
-  
-  .share-icon {
+}
+
+.share-icon {
     transform: scale(1);
     transition: transform 300ms ease-in-out;
-  }
-  
-  .share-btn.open {
+}
+
+.share-btn.open {
     width: 8em;
-  }
-  
-  .share-btn.open::before {
+}
+
+.share-btn.open::before {
     background-color: #008000;
-  }
-  
-  .share-btn.open :is(.fa-facebook-f, .fa-twitter, .fa-instagram) {
+}
+
+.share-btn.open :is(.fa-facebook-f, .fa-twitter, .fa-instagram) {
     transform: scale(1);
     color: #008000;
-  }
-  
-  .share-btn.open .share-icon {
+}
+
+.share-btn.open .share-icon {
     transform: scale(0);
-  }
+}

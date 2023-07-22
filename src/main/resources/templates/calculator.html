@@ -1,81 +1,71 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Web Calculator</title>
-    <link rel="stylesheet" type="text/css" href="../static/styles/calculator-style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
-
-<div class="calculator-container">
-
-    <div class="calculator">
-        <form action="/calculate" method="post">
-            <div class="expression-field">
-                <div id="expressionLabel" class="input-output" th:text="${result}"></div>
+    <head>
+        <title>Web Calculator</title>
+        <link rel="stylesheet" type="text/css" href="../static/styles/calculator-style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+    <body>
+        <div class="calculator-container">
+            <div class="calculator">
+                <form action="/calculate" method="post">
+                    <div class="expression-field">
+                        <div id="expressionLabel" class="input-output" th:text="${result}"></div>
+                    </div>
+                    <div class="buttons">
+                        <button type="button" onclick="handleButtonClick('pi')">pi</button>
+                        <button type="button" onclick="handleButtonClick('e')">e</button>
+                        <button type="button" onclick="handleButtonClick('0')">0</button>
+                        <button type="button" onclick="handleButtonClick('1')">1</button>
+                        <button type="button" onclick="handleButtonClick('2')">2</button>
+                        <button type="button" onclick="handleButtonClick('3')">3</button>
+                        <button type="button" onclick="clearInput()">AC</button>
+                        <button type="button" onclick="handleButtonClick('4')">4</button>
+                        <button type="button" onclick="handleButtonClick('5')">5</button>
+                        <button type="button" onclick="handleButtonClick('6')">6</button>
+                        <button type="button" onclick="handleButtonClick('7')">7</button>
+                        <button type="button" onclick="handleButtonClick('8')">8</button>
+                        <button type="button" onclick="handleButtonClick('9')">9</button>
+                        <button type="button" onclick="handleButtonClick('+')">+</button>
+                        <button type="button" onclick="handleButtonClick('-')">-</button>
+                        <button type="button" onclick="handleButtonClick('*')">*</button>
+                        <button type="button" onclick="handleButtonClick('/')">/</button>
+                        <button type="button" onclick="handleButtonClick('^')">^</button>
+                        <button type="button" onclick="handleButtonClick('cos')">cos</button>
+                        <button type="button" onclick="handleButtonClick('sin')">sin</button>
+                        <button type="button" onclick="handleButtonClick('tan')">tan</button>
+                        <button type="button" onclick="handleButtonClick('atan')">atan</button>
+                        <button type="button" onclick="handleButtonClick('acos')">acos</button>
+                        <button type="button" onclick="handleButtonClick('asin')">asin</button>
+                        <button type="button" onclick="handleButtonClick('log')">log</button>
+                        <button type="button" onclick="handleButtonClick('ln')">ln</button>
+                        <button type="button" onclick="handleButtonClick('(')">(</button>
+                        <button type="button" onclick="handleButtonClick(')')">)</button>
+                        <button type="button" onclick="handleButtonClick('mod')">mod</button>
+                        <button type="button" onclick="handleButtonClick('.')">.</button>
+                        <button type="button" onclick="handleButtonClick('√')">√</button>
+                        <button type="button" onclick="handleButtonClick('x')">x</button>
+                        <button type="button" class="btn-calc" onclick="calculateWithX()">=</button>
+                    </div>
+                </form>
             </div>
-    
-            <div class="buttons">
-                <button type="button" onclick="handleButtonClick('pi')">pi</button>
-                <button type="button" onclick="handleButtonClick('e')">e</button>
-                <button type="button" onclick="handleButtonClick('0')">0</button>
-                <button type="button" onclick="handleButtonClick('1')">1</button>
-                <button type="button" onclick="handleButtonClick('2')">2</button>
-                <button type="button" onclick="handleButtonClick('3')">3</button>
-                <button type="button" onclick="clearInput()">AC</button>
-                <button type="button" onclick="handleButtonClick('4')">4</button>
-                <button type="button" onclick="handleButtonClick('5')">5</button>
-                <button type="button" onclick="handleButtonClick('6')">6</button>
-                <button type="button" onclick="handleButtonClick('7')">7</button>
-                <button type="button" onclick="handleButtonClick('8')">8</button>
-                <button type="button" onclick="handleButtonClick('9')">9</button>
-                <button type="button" onclick="handleButtonClick('+')">+</button>
-                <button type="button" onclick="handleButtonClick('-')">-</button>
-                <button type="button" onclick="handleButtonClick('*')">*</button>
-                <button type="button" onclick="handleButtonClick('/')">/</button>
-                <button type="button" onclick="handleButtonClick('^')">^</button>
-                <button type="button" onclick="handleButtonClick('cos')">cos</button>
-                <button type="button" onclick="handleButtonClick('sin')">sin</button>
-                <button type="button" onclick="handleButtonClick('tan')">tan</button>
-                <button type="button" onclick="handleButtonClick('atan')">atan</button>
-                <button type="button" onclick="handleButtonClick('acos')">acos</button>
-                <button type="button" onclick="handleButtonClick('asin')">asin</button>
-                <button type="button" onclick="handleButtonClick('log')">log</button>
-                <button type="button" onclick="handleButtonClick('ln')">ln</button>
-                <button type="button" onclick="handleButtonClick('(')">(</button>
-                <button type="button" onclick="handleButtonClick(')')">)</button>
-                <button type="button" onclick="handleButtonClick('mod')">mod</button>
-                <button type="button" onclick="handleButtonClick('.')">.</button>
-                <button type="button" onclick="handleButtonClick('√')">√</button>
-                <button type="button" onclick="handleButtonClick('x')">x</button>
-                <button type="button" class="btn-calc" onclick="calculateWithX()">=</button>
-            </div>
-        </form>
-    </div>
-
-
-
-    <button class="share-btn" id="shareBtn">
-        <i class="fa fa-angle-double-right"></i>
-        <span class="social-icons">
+            <button class="share-btn" id="shareBtn">
+            <i class="fa fa-angle-double-right"></i>
+            <span class="social-icons">
             <i class="fa-brands fa-facebook-f" onclick="showNotification('1')"></i>
             <i class="fa-brands fa-twitter" onclick="showNotification('2')"></i>
             <i class="fa-brands fa-instagram" onclick="showNotification('3')"></i>
-        </span>
-    </button>
-    
-
-<div id="modal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
-        <label for="x">Enter the value of x:</label>
-        <input type="number" id="xInput" name="x" required>
-        <button onclick="setXValue()">Calculate</button>
-    </div>
-</div>
-
-</div>
-
-<script src="../static/scripts/calculator-logic.js"></script>
-</body>
+            </span>
+            </button>
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeModal()">&times;</span>
+                    <label for="x">Enter the value of x:</label>
+                    <input type="number" id="xInput" name="x" required>
+                    <button onclick="setXValue()">Calculate</button>
+                </div>
+            </div>
+        </div>
+        <script src="../static/scripts/calculator-logic.js"></script>
+    </body>
 </html>

@@ -1,18 +1,20 @@
 let shareBtn = document.getElementById("shareBtn");
 
 shareBtn.addEventListener("click", () => {
-  shareBtn.classList.toggle("open");
+    shareBtn.classList.toggle("open");
 });
 
 this.classList.add("active");
 
 function handleButtonClick(value) {
-    const expressionLabel = document.getElementById('expressionLabel');
+    const expressionLabel = document.getElementById(
+        'expressionLabel');
     const currentExpression = expressionLabel.innerText;
 
     if (value === 'x') {
         expressionLabel.innerText += value;
-    } else if (value.length === 1 && /^[a-zA-Z]+$/.test(value) && currentExpression.indexOf('x') === -1) {
+    } else if (value.length === 1 && /^[a-zA-Z]+$/.test(value) &&
+        currentExpression.indexOf('x') === -1) {
         expressionLabel.innerText += value + '(';
     } else if (currentExpression.includes("Error")) {
         clearInput();
@@ -22,7 +24,8 @@ function handleButtonClick(value) {
 }
 
 function calculateWithX() {
-    let expressionLabel = document.getElementById('expressionLabel');
+    let expressionLabel = document.getElementById(
+        'expressionLabel');
     let expression = expressionLabel.innerText.trim();
 
     if (expression.includes('x')) {
@@ -34,7 +37,8 @@ function calculateWithX() {
 
 function setXValue() {
     let xInput = document.getElementById("xInput");
-    let expressionLabel = document.getElementById("expressionLabel");
+    let expressionLabel = document.getElementById(
+        "expressionLabel");
     let expression = expressionLabel.innerText;
     let newValue = xInput.value;
 
@@ -50,7 +54,8 @@ function setXValue() {
 }
 
 function evaluateExpression() {
-    let expressionLabel = document.getElementById("expressionLabel");
+    let expressionLabel = document.getElementById(
+        "expressionLabel");
     let expression = expressionLabel.innerText;
 
     try {
