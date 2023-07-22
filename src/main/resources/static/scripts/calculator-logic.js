@@ -4,6 +4,8 @@ shareBtn.addEventListener("click", () => {
   shareBtn.classList.toggle("open");
 });
 
+this.classList.add("active");
+
 function handleButtonClick(value) {
     const expressionLabel = document.getElementById('expressionLabel');
     const currentExpression = expressionLabel.innerText;

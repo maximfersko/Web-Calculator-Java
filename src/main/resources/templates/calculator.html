@@ -3,6 +3,7 @@
 <head>
     <title>Web Calculator</title>
     <link rel="stylesheet" type="text/css" href="../static/styles/calculator-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
@@ -11,7 +12,7 @@
     <div class="calculator">
         <form action="/calculate" method="post">
             <div class="expression-field">
-                <div id="expressionLabel" class="input-output" th:text="${result}"></div> <!-- Input/output field -->
+                <div id="expressionLabel" class="input-output" th:text="${result}"></div>
             </div>
     
             <div class="buttons">
@@ -55,11 +56,11 @@
 
 
     <button class="share-btn" id="shareBtn">
-        <i class="fa-solid fa-arrow-up-right-from-square share-icon"></i>
+        <i class="fa fa-angle-double-right"></i>
         <span class="social-icons">
-            <i class="fa-brands fa-facebook-f" onclick="showNotification('1')">1</i>
-            <i class="fa-brands fa-twitter" onclick="showNotification('2')">2</i>
-            <i class="fa-brands fa-instagram" onclick="showNotification('3')">3</i>
+            <i class="fa-brands fa-facebook-f" onclick="showNotification('1')"></i>
+            <i class="fa-brands fa-twitter" onclick="showNotification('2')"></i>
+            <i class="fa-brands fa-instagram" onclick="showNotification('3')"></i>
         </span>
     </button>
     
