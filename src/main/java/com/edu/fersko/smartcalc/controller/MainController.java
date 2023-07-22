@@ -23,17 +23,19 @@ public class MainController {
         return "calculator";
     }
 
-    @PostMapping("/calculate")
-    public String calculate(@RequestParam("expression") String expression,
-                            @RequestParam(value = "x", required = false) Double x,
-                            Model model) {
-        double result;
-        if (x != null) {
-            result = reversePolishNotation.getResult(expression, x);
-        } else {
-            result = reversePolishNotation.getResult(expression);
-        }
-        model.addAttribute("result", result);
-        return "calculator";
+@PostMapping("/calculate")
+public String calculate(@RequestParam("expression") String expression,
+                        @RequestParam(value = "x", required = false) Double x,
+                        Model model) {
+    double result;
+    if (x != null) {
+        result = reversePolishNotation.getResult(expression, x);
+    } else {
+        result = reversePolishNotation.getResult(expression);
     }
+    model.addAttribute("result", result);
+    return "calculator";
+}
+
+
 }

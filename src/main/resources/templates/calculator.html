@@ -2,28 +2,29 @@
 <html>
 <head>
     <title>Web Calculator</title>
-    <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/calculator-style.css">
 </head>
 <body>
 <div class="calculator">
     <form action="/calculate" method="post">
-        <input type="text" id="expressionInput" name="expression" placeholder="Enter an expression" required>
-        <br>
-        <label for="x"></label>
-        <input type="number" name="x">
-        <br>
+        <div class="expression-field">
+            <div id="expressionLabel" class="input-output" th:text="${result}"></div> <!-- Input/output field -->
+        </div> <!-- Label for displaying the expression -->
+
         <div class="buttons">
+            <button type="button" onclick="handleButtonClick('pi')">pi</button>
+            <button type="button" onclick="handleButtonClick('e')">e</button>
             <button type="button" onclick="handleButtonClick('0')">0</button>
             <button type="button" onclick="handleButtonClick('1')">1</button>
             <button type="button" onclick="handleButtonClick('2')">2</button>
             <button type="button" onclick="handleButtonClick('3')">3</button>
+            <button type="button" onclick="clearInput()">AC</button>
             <button type="button" onclick="handleButtonClick('4')">4</button>
             <button type="button" onclick="handleButtonClick('5')">5</button>
             <button type="button" onclick="handleButtonClick('6')">6</button>
             <button type="button" onclick="handleButtonClick('7')">7</button>
             <button type="button" onclick="handleButtonClick('8')">8</button>
             <button type="button" onclick="handleButtonClick('9')">9</button>
-            <br>
             <button type="button" onclick="handleButtonClick('+')">+</button>
             <button type="button" onclick="handleButtonClick('-')">-</button>
             <button type="button" onclick="handleButtonClick('*')">*</button>
@@ -40,16 +41,25 @@
             <button type="button" onclick="handleButtonClick('(')">(</button>
             <button type="button" onclick="handleButtonClick(')')">)</button>
             <button type="button" onclick="handleButtonClick('mod')">mod</button>
-            <button type="submit" class="btn-calc">=</button>
+            <button type="button" onclick="handleButtonClick('.')">.</button>
+            <button type="button" onclick="handleButtonClick('√')">√</button>
+            <button type="button" onclick="handleButtonClick('x')">x</button>
+            <button type="button" class="btn-calc" onclick="calculateWithX()">=</button>
         </div>
-        <br>
     </form>
-    <div class="result">
-        <h2>Result:</h2>
-        <p th:text="${result}"></p>
+    
+</div>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <label for="x">Enter the value of x:</label>
+        <input type="number" id="xInput" name="x" required>
+        <button onclick="setXValue()">Calculate</button>
     </div>
 </div>
 
-<script src="../static/script.js"></script>
+
+<script src="scripts/calculator-logic.js"></script>
 </body>
 </html>
