@@ -2,20 +2,20 @@
 <html>
 <head>
     <title>Web Calculator</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
 </head>
 <body>
 <div class="calculator">
     <form action="/calculate" method="post">
         <input type="text" id="expressionInput" name="expression" placeholder="Enter an expression" required>
         <br>
-        <label for="x">Value of x (optional):</label>
+        <label for="x"></label>
         <input type="number" name="x">
         <br>
         <div class="buttons">
             <button type="button" onclick="handleButtonClick('0')">0</button>
             <button type="button" onclick="handleButtonClick('1')">1</button>
-            <button type="button" onclick="handleButtonClickr('2')">2</button>
+            <button type="button" onclick="handleButtonClick('2')">2</button>
             <button type="button" onclick="handleButtonClick('3')">3</button>
             <button type="button" onclick="handleButtonClick('4')">4</button>
             <button type="button" onclick="handleButtonClick('5')">5</button>
@@ -37,12 +37,12 @@
             <button type="button" onclick="handleButtonClick('asin')">asin</button>
             <button type="button" onclick="handleButtonClick('log')">log</button>
             <button type="button" onclick="handleButtonClick('ln')">ln</button>
-            <button type="button" onclick="handleButtonClick('(')">)</button>
+            <button type="button" onclick="handleButtonClick('(')">(</button>
             <button type="button" onclick="handleButtonClick(')')">)</button>
             <button type="button" onclick="handleButtonClick('mod')">mod</button>
+            <button type="submit" class="btn-calc">=</button>
         </div>
         <br>
-        <button type="submit">Calculate</button>
     </form>
     <div class="result">
         <h2>Result:</h2>
@@ -50,6 +50,6 @@
     </div>
 </div>
 
-<script src="script.js"></script>
+<script src="../static/script.js"></script>
 </body>
 </html>
