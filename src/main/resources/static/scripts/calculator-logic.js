@@ -80,9 +80,3 @@ function clearInput() {
     document.getElementById('expressionLabel').innerText = "";
     document.getElementById('resultLabel').innerText = "";
 }
-
-
-// delete this
-function showNotification(number) {
-    alert('You clicked button ' + number);
-}
