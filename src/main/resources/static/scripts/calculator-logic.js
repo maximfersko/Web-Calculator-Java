@@ -54,17 +54,35 @@ function setXValue() {
 }
 
 function evaluateExpression() {
-    let expressionLabel = document.getElementById(
-        "expressionLabel");
-    let expression = expressionLabel.innerText;
+    let expressionLabel = document.getElementById("expressionLabel");
+    let expression = expressionLabel.innerText.trim();
 
-    try {
-        let result = eval(expression);
-        expressionLabel.innerText = result;
-    } catch (error) {
-        expressionLabel.innerText = "Error";
+    if (expression === '') {
+        expressionLabel.innerText = 'Error';
+        return;
     }
+
+    fetch('/calculate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ expression }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.hasOwnProperty('result')) {
+                expressionLabel.innerText = data.result;
+            } else {
+                expressionLabel.innerText = 'Error';
+            }
+        })
+        .catch((error) => {
+            expressionLabel.innerText = 'Error';
+        });
 }
+
+
 
 function showModal() {
     let modal = document.getElementById("modal");
