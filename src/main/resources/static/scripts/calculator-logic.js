@@ -35,6 +35,23 @@ function calculateWithX() {
     }
 }
 
+function clearHistory() {
+    const historyList = document.getElementById("historyList");
+    historyList.innerHTML = "";
+
+    fetch('/clearHistory', {
+        method: 'POST',
+    })
+        .then((response) => response.text())
+        .then((data) => {
+            console.log(data); 
+        })
+        .catch((error) => {
+            console.error('Error clearing history:', error);
+        });
+}
+
+
 function setXValue() {
     let xInput = document.getElementById("xInput");
     let expressionLabel = document.getElementById(
@@ -52,7 +69,6 @@ function setXValue() {
 
     evaluateExpression();
 }
-
 function evaluateExpression() {
     let expressionLabel = document.getElementById("expressionLabel");
     let expression = expressionLabel.innerText.trim();
@@ -71,16 +87,20 @@ function evaluateExpression() {
     })
         .then((response) => response.json())
         .then((data) => {
+            let result;
             if (data.hasOwnProperty('result')) {
-                expressionLabel.innerText = data.result;
+                result = data.result;
+                expressionLabel.innerText = result;
             } else {
-                expressionLabel.innerText = 'Error';
+                result = 'Error';
+                expressionLabel.innerText = result;
             }
         })
         .catch((error) => {
             expressionLabel.innerText = 'Error';
         });
 }
+
 
 
 
@@ -97,4 +117,31 @@ function closeModal() {
 function clearInput() {
     document.getElementById('expressionLabel').innerText = "";
     document.getElementById('resultLabel').innerText = "";
+}
+
+
+function fetchHistory() {
+    fetch('/history')
+        .then((response) => response.json())
+        .then((data) => {
+            const historyList = document.getElementById("historyList");
+            historyList.innerHTML = "";
+            data.forEach((item) => {
+                const historyItem = document.createElement("li");
+                historyItem.textContent = item;
+                historyList.appendChild(historyItem);
+            });
+        })
+        .catch((error) => {
+            console.error("Error fetching history:", error);
+        });
+}
+
+
+function toggleHistory() {
+    let historySidebar = document.getElementById("historySidebar");
+    historySidebar.classList.toggle("open");
+    if (historySidebar.classList.contains("open")) {
+        fetchHistory();
+    }
 }

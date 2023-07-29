@@ -2,6 +2,8 @@ package com.edu.fersko.smartcalc.models;
 
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Stack;
 
@@ -57,6 +59,20 @@ public class ReversePolishNotation {
         this.expression = expression;
         this.x = 0;
     }
+
+    public List<Point> calculateGraph(String expression, double xStart, double xEnd, double step) {
+        List<Point> points = new ArrayList<>();
+        double x = xStart;
+
+        while (x <= xEnd) {
+            double y = getResult(expression, x);
+            points.add(new Point(x, y));
+            x += step;
+        }
+
+        return points;
+    }
+
 
     public double getResult() {
         return calculateRPN(getReversePolishNotation());
