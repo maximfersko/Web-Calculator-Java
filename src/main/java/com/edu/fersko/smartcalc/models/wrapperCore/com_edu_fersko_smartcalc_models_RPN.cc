@@ -1,5 +1,5 @@
 #include <jni.h>
-#include "smartCalc.h"
+#include "core/smartCalculator/smartCalc.h"
 #include "com_edu_fersko_smartcalc_models_RPN.h"
 
 // Define smartCalcInstance as a global variable
