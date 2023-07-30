@@ -1,7 +1,7 @@
 package com.edu.fersko.smartcalc.controller;
 
 import com.edu.fersko.smartcalc.models.Point;
-import com.edu.fersko.smartcalc.models.ReversePolishNotation;
+import com.edu.fersko.smartcalc.models.RPN;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,12 +20,12 @@ import java.util.Map;
 @Controller
 public class MainController {
 
-    private final ReversePolishNotation reversePolishNotation;
+    private final RPN rpn;
     private final List<String> history = new ArrayList<>(); 
 
     @Autowired
-    public MainController(ReversePolishNotation reversePolishNotation) {
-        this.reversePolishNotation = reversePolishNotation;
+    public MainController(RPN rpn) {
+        this.rpn = rpn;
         loadHistory();
     }
 
@@ -80,7 +80,7 @@ public class MainController {
     @ResponseBody
     public ResponseEntity<Map<String, Double>> calculate(@RequestBody @NotNull Map<String, String> requestBody) {
         String expression = requestBody.get("expression");
-        double result = reversePolishNotation.getResult(expression);
+        double result = rpn.getResult(expression, 0);
 
         Map<String, Double> resultMap = new HashMap<>();
         resultMap.put("result", result);
@@ -108,13 +108,15 @@ public class MainController {
     }
 
     @PostMapping("/calculateGraph")
-    public ResponseEntity<Object> calculateGraph(@RequestBody @NotNull Map<String, String> requestBody) {
+    @ResponseBody
+    public ResponseEntity<List<Point>> calculateGraph(@RequestBody @NotNull Map<String, String> requestBody) {
         String expression = requestBody.get("expression");
         double xStart = Double.parseDouble(requestBody.get("xStart"));
         double xEnd = Double.parseDouble(requestBody.get("xEnd"));
         double step = Double.parseDouble(requestBody.get("step"));
 
-        List<Point> points = reversePolishNotation.calculateGraph(expression, xStart, xEnd, step);
+        // Use the graphBuilder method from the RPN class
+        List<Point> points = rpn.graphBuilder(null, expression);
 
         return ResponseEntity.ok(points);
     }

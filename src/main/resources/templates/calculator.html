@@ -26,8 +26,6 @@
                     <div id="expressionLabel" class="input-output" th:text="${result}"></div>
                 </div>
                 <div class="buttons">
-                    <button type="button" onclick="handleButtonClick('pi')">pi</button>
-                    <button type="button" onclick="handleButtonClick('e')">e</button>
                     <button type="button" onclick="handleButtonClick('0')">0</button>
                     <button type="button" onclick="handleButtonClick('1')">1</button>
                     <button type="button" onclick="handleButtonClick('2')">2</button>
@@ -71,23 +69,24 @@
         <div id="infoCalculator" class="calculator">
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta cumque perferendis omnis hic </p>
         </div>
-        <div id="graphicsCalculator" class="calculator">
-            <h2>Build Graphics</h2>
-            <form id="graphForm">
-                <label for="graphExpression">Enter the expression:</label>
-                <input type="text" id="graphExpression" required>
-                <label for="xStart">X Start:</label>
-                <input type="number" id="xStart" required>
-                <label for="xEnd">X End:</label>
-                <input type="number" id="xEnd" required>
-                <label for="step">Step:</label>
-                <input type="number" id="step" required>
-                <button type="button" onclick="plotGraph()">Plot Graph</button>
-            </form>
-            <div id="graphContainer"></div>
-        </div>
-        
-          
+           <div id="graphicsCalculator" class="calculator">
+               <h2>Build Graphics</h2>
+               <form id="graphForm">
+                   <label for="graphExpression">Enter the expression:</label>
+                   <input type="text" id="graphExpression" required>
+                   <label for="xStart">X Start:</label>
+                   <input type="number" id="xStart" required>
+                   <label for="xEnd">X End:</label>
+                   <input type="number" id="xEnd" required>
+                   <label for="step">Step:</label>
+                   <input type="number" id="step" required>
+                   <button type="button" onclick="plotGraph()">Plot Graph</button>
+               </form>
+               <canvas id="graphContainer" width="800" height="400"></canvas>
+           </div>
+
+
+
 
        </div>
 
@@ -109,6 +108,8 @@
         <script src="scripts/calculator-logic.js"></script>
         <script src="scripts/menu-logic.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@1.1.1/dist/chartjs-plugin-zoom.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
         <script src="scripts/graphics-logic.js"></script>
        
 
