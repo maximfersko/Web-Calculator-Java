@@ -6,9 +6,10 @@ JNI_INCLUDE_PATH = "C:\Program Files\Java\jdk-17\include"
 JNI_INCLUDE_PATH_WIN = $(JNI_INCLUDE_PATH)\win32
 FLAGS = -shared
 LIB_NAME = core
+PATH_LIB = src/main/java/com/edu/fersko/smartcalc/models/lib
 
 windows:
-	$(CXX) $(FLAGS) -I$(JNI_INCLUDE_PATH_WIN) -I$(JNI_INCLUDE_PATH) -o $(LIB_NAME).dll \
+	$(CXX) $(FLAGS) -I$(JNI_INCLUDE_PATH_WIN) -I$(JNI_INCLUDE_PATH) -o $(PATH_LIB)/$(LIB_NAME).dll \
 	$(DIR_SOURCE_WRAPPER_CORE)/parser.cc \
 	$(DIR_SOURCE_WRAPPER_CORE)/calculate.cc \
 	$(DIR_SOURCE_WRAPPER_CORE)/graphBuilder.cc \

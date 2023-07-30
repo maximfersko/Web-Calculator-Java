@@ -11,49 +11,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.edu.fersko.smartcalc.services.CalculatorUtilitiesService;
+
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
 public class MainController {
-
     private final RPN rpn;
-    private final List<String> history = new ArrayList<>(); 
+
+    private final CalculatorUtilitiesService service;
+
 
     @Autowired
-    public MainController(RPN rpn) {
+    public MainController(RPN rpn, CalculatorUtilitiesService service) {
         this.rpn = rpn;
-        loadHistory();
+        this.service = service;
+        this.service.loadHistory();
     }
 
-    private static final String HISTORY_FILE_PATH = System.getProperty("user.dir") + File.separator + "data" + File.separator + "history.txt";
 
-
-    private void writeHistoryToFile() {
-        try {
-            File dataFolder = new File("data");
-            if (!dataFolder.exists()) {
-                dataFolder.mkdir();
-            }
-
-            File historyFile = new File(HISTORY_FILE_PATH);
-            if (!historyFile.exists()) {
-                historyFile.createNewFile();
-            }
-
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(historyFile))) {
-                for (String calculation : history) {
-                    writer.write(calculation);
-                    writer.newLine();
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
 
     @GetMapping("/")
@@ -64,13 +43,13 @@ public class MainController {
     @GetMapping("/history")
     @ResponseBody
     public List<String> getHistory() {
-        return history;
+        return service.getHistory();
     }
     private void loadHistoryFromFile() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(HISTORY_FILE_PATH))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(CalculatorUtilitiesService.getHistoryFilePath()))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                history.add(line);
+                service.getHistory().add(line);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -86,9 +65,9 @@ public class MainController {
         resultMap.put("result", result);
 
         String calculation = expression + " = " + result;
-        history.add(calculation);
+        service.getHistory().add(calculation);
 
-        writeHistoryToFile();
+        service.writeHistoryToFile();
 
         return ResponseEntity.ok(resultMap);
     }
@@ -96,9 +75,9 @@ public class MainController {
     @PostMapping("/clearHistory")
     @ResponseBody
     public ResponseEntity<String> clearHistory() {
-        history.clear();
+        service.getHistory().clear();
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(HISTORY_FILE_PATH))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(CalculatorUtilitiesService.getHistoryFilePath()))) {
             writer.write("");
         } catch (IOException e) {
             e.printStackTrace();
@@ -121,14 +100,5 @@ public class MainController {
         return ResponseEntity.ok(points);
     }
 
-     private void loadHistory() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(HISTORY_FILE_PATH))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                history.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 }

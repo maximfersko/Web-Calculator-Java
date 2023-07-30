@@ -15,20 +15,49 @@ import java.io.FileReader;
 
 @Service
 public class CalculatorUtilitiesService {
-    private final String HISTORY_PATH = "../../../../../history.txt";
+    private static final String HISTORY_FILE_PATH = System.getProperty("user.dir") + File.separator + "data" + File.separator + "history.txt";
 
-    public List<String> getHistory() {
-        List<String> result = new ArrayList<>();
-        try(FileReader reader = new FileReader(HISTORY_PATH)) {
-            BufferedReader bufferedReader = new BufferedReader(reader);
-            String line = "";
-            while((line = bufferedReader.readLine()) != null) {
-                result.add(line);
+    private final List<String> history = new ArrayList<>();
+
+    public void writeHistoryToFile() {
+        try {
+            File dataFolder = new File("data");
+            if (!dataFolder.exists()) {
+                dataFolder.mkdir();
             }
-        } catch (Exception e) {
-            System.err.println("Error: " + e);
+
+            File historyFile = new File(HISTORY_FILE_PATH);
+            if (!historyFile.exists()) {
+                historyFile.createNewFile();
+            }
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(historyFile))) {
+                for (String calculation : history) {
+                    writer.write(calculation);
+                    writer.newLine();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return result;
     }
 
+    public void loadHistory() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(HISTORY_FILE_PATH))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                history.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<String> getHistory() {
+        return history;
+    }
+
+    public static String getHistoryFilePath() {
+        return HISTORY_FILE_PATH;
+    }
 }
