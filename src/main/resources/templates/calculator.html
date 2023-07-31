@@ -26,8 +26,6 @@
                     <div id="expressionLabel" class="input-output" th:text="${result}"></div>
                 </div>
                 <div class="buttons">
-                    <button type="button" onclick="handleButtonClick('pi')">pi</button>
-                    <button type="button" onclick="handleButtonClick('e')">e</button>
                     <button type="button" onclick="handleButtonClick('0')">0</button>
                     <button type="button" onclick="handleButtonClick('1')">1</button>
                     <button type="button" onclick="handleButtonClick('2')">2</button>
@@ -59,6 +57,7 @@
                     <button type="button" onclick="handleButtonClick('√')">√</button>
                     <button type="button" onclick="handleButtonClick('x')">x</button>
                     <button type="button" class="btn-calc" onclick="calculateWithX()">=</button>
+                    <button type="button" onclick="toggleHistory()">History</button>
                 </div>
             </form>
         </div>
@@ -68,8 +67,26 @@
         </div>
 
         <div id="infoCalculator" class="calculator">
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta cumque perferendis omnis hic quam nobis neque est voluptate, molestias reprehenderit odio eos nulla vitae adipisci commodi, enim provident totam fugit?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum doloremque nobis voluptatum officia dolore veniam blanditiis, saepe ullam quo omnis unde qui iure inventore placeat ad distinctio soluta quae quaerat! Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit laborum ex amet eligendi magni optio nam vitae enim autem officia, saepe ea, at fugiat aspernatur nemo molestias! Possimus dolore, aut alias quas ab saepe tenetur quibusdam eius exercitationem neque minima, cum aliquid doloremque nemo obcaecati aperiam. Fugiat reprehenderit repellendus, similique sed accusantium voluptate tenetur quisquam molestiae tempora, dolore quibusdam dignissimos molestias. Tenetur magni molestias aut debitis sed? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione necessitatibus itaque illum dicta nisi soluta voluptates vero, dolorum animi voluptas, ducimus laborum maxime esse assumenda distinctio voluptatum inventore ea doloribus. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam, aut ad saepe suscipit labore debitis. Sequi, sit! Quisquam blanditiis consectetur ipsam deserunt debitis tempore numquam dicta nisi, maxime dolorem natus modi eligendi, obcaecati repudiandae officia architecto. Ab qui quisquam cum, nesciunt nisi pariatur delectus veniam quo a consequuntur perspiciatis nobis fuga magnam mollitia eveniet aspernatur quae autem voluptas laudantium repellendus similique neque officia laboriosam fugiat. Amet consequuntur minus cum quibusdam illo ullam iure nostrum magnam tempore, molestiae voluptates sit delectus unde tempora in, harum temporibus? Quibusdam in facere incidunt magni quisquam. Autem ipsam possimus enim optio consequatur deserunt dolores, fuga sunt quibusdam reiciendis recusandae delectus ipsum doloremque ab quisquam nobis tempore. Sequi deleniti nobis vero, repellendus id aspernatur enim ipsam quam doloribus hic nesciunt, voluptatibus consequatur natus similique sint? Esse, reiciendis eligendi asperiores, quibusdam tempora ad recusandae labore ullam dolorum repudiandae rem, sequi pariatur dicta dignissimos autem? Quo, ducimus rem? Ducimus eius rem perferendis aliquam neque pariatur aspernatur nemo! Voluptatem quas vitae sunt eaque, at a in illum saepe suscipit quidem error numquam ad itaque. Asperiores veniam corrupti, distinctio ipsam officia, autem magni possimus quas nobis aperiam nisi delectus maxime accusamus illo neque consequatur. Veniam dolorem quisquam dicta nemo enim natus harum beatae soluta? Sequi quas omnis neque sunt, molestias eligendi, saepe quae earum similique ducimus suscipit nisi consequatur sint. Atque dignissimos corporis iure enim fuga exercitationem harum laboriosam sequi adipisci id voluptatem tempore doloribus, dolor sed maxime error dolorem? Pariatur ipsa reprehenderit nostrum ullam eligendi doloremque eum nisi? Quisquam hic alias consequuntur! Quos possimus reiciendis provident alias earum reprehenderit sapiente recusandae, a dolor quasi blanditiis nam ducimus ad natus non, iusto quis deserunt. Voluptatum, earum in ratione optio tempora quis asperiores sit et excepturi rem ad repellendus tempore inventore est provident! Architecto aliquid saepe molestiae necessitatibus eaque praesentium, perferendis quo velit dignissimos expedita, a ipsa ad voluptas fugiat maiores corrupti iste. Illum, consequatur officia, ratione delectus dolor accusantium alias architecto placeat quae a aspernatur fugiat magnam totam nihil sunt incidunt amet dicta fugit impedit consequuntur! Fuga maiores voluptates iste modi aliquid pariatur harum quibusdam minus. Tempore similique quisquam ad expedita ipsa, adipisci quo quis consectetur corrupti qui! Cum quae eos consectetur ducimus reiciendis velit doloribus corporis, dicta, nisi fugit delectus eius officia earum magnam deserunt, eveniet inventore possimus provident repudiandae dolorum accusantium ipsum voluptatem. Voluptatem facere voluptates non repudiandae ipsa. Fugit cum, fugiat laudantium enim ad dolores ex excepturi? loio</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta cumque perferendis omnis hic </p>
         </div>
+           <div id="graphicsCalculator" class="calculator">
+               <h2>Build Graphics</h2>
+               <form id="graphForm">
+                   <label for="graphExpression">Enter the expression:</label>
+                   <input type="text" id="graphExpression" required>
+                   <label for="xStart">X Start:</label>
+                   <input type="number" id="xStart" required>
+                   <label for="xEnd">X End:</label>
+                   <input type="number" id="xEnd" required>
+                   <label for="step">Step:</label>
+                   <input type="number" id="step" required>
+                   <button type="button" onclick="plotGraph()">Plot Graph</button>
+               </form>
+               <canvas id="graphContainer" width="800" height="400"></canvas>
+           </div>
+
+
+
 
        </div>
 
@@ -81,9 +98,20 @@
                 <button onclick="setXValue()">Calculate</button>
             </div>
         </div>
-
+        <div id="historySidebar" class="sidebar">
+            <h3>History:</h3>
+            <ul id="historyList"></ul>
+            <button onclick="clearHistory()">Clear History</button>
+        </div>
+        
         </div>
         <script src="scripts/calculator-logic.js"></script>
         <script src="scripts/menu-logic.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@1.1.1/dist/chartjs-plugin-zoom.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+        <script src="scripts/graphics-logic.js"></script>
+       
+
     </body>
 </html>

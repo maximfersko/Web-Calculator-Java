@@ -10,6 +10,7 @@ function showCalculator(calculatorName) {
         }
     });
 
+
     setTimeout(() => {
         calculatorWrapper.classList.add('animate-slide-up');
     }, 50);
