@@ -1,7 +1,6 @@
 package com.edu.fersko.smartcalc.controller;
 
 import com.edu.fersko.smartcalc.models.ReversePolishNotation;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -31,7 +30,7 @@ public class MainController {
 
 
     @PostMapping("/calculate")
-    public ResponseEntity<Map<String, Double>> calculate(@RequestBody @NotNull Map<String, String> requestBody) {
+    public ResponseEntity<Map<String, Double>> calculate(@RequestBody Map<String, String> requestBody) {
         String expression = requestBody.get("expression");
         double result = reversePolishNotation.getResult(expression);
 
