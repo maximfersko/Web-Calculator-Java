@@ -1,9 +1,12 @@
 package com.edu.fersko.smartcalc.controller;
 
+import com.edu.fersko.smartcalc.models.NativeCalculationException;
 import com.edu.fersko.smartcalc.models.Point;
 import com.edu.fersko.smartcalc.models.RPN;
+import com.edu.fersko.smartcalc.models.ResultResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.edu.fersko.smartcalc.services.CalculatorUtilitiesService;
 
 import java.io.*;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,31 +47,29 @@ public class MainController {
     public List<String> getHistory() {
         return service.getHistory();
     }
-    private void loadHistoryFromFile() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(CalculatorUtilitiesService.getHistoryFilePath()))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                service.getHistory().add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    @PostMapping("/calculate")
-    public ResponseEntity<Map<String, Double>> calculate(@RequestBody Map<String, String> requestBody) {
-        String expression = requestBody.get("expression");
-        double result = rpn.getResult(expression, 0);
 
-        Map<String, Double> resultMap = new HashMap<>();
-        resultMap.put("result", result);
+    @PostMapping("/calculate")
+    public ResponseEntity<ResultResponse> calculate(@RequestBody Map<String, String> requestBody) {
+        String expression = requestBody.get("expression");
+        double result;
+
+        try {
+            result = rpn.getResult(expression, 0);
+        } catch (NativeCalculationException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResultResponse("Error during calculation"));
+        }
 
         String calculation = expression + " = " + result;
         service.getHistory().add(calculation);
-
         service.writeHistoryToFile();
 
-        return ResponseEntity.ok(resultMap);
+        ResultResponse resultResponse = new ResultResponse("Error during calculation");
+        resultResponse.setResult(result);
+
+        return ResponseEntity.ok(resultResponse);
     }
+
+
 
     @PostMapping("/clearHistory")
     @ResponseBody
@@ -93,7 +93,7 @@ public class MainController {
         double xEnd = Double.parseDouble(requestBody.get("xEnd"));
         double step = Double.parseDouble(requestBody.get("step"));
 
-        // Use the graphBuilder method from the RPN class
+
         List<Point> points = rpn.graphBuilder(null, expression);
 
         return ResponseEntity.ok(points);

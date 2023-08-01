@@ -19,7 +19,7 @@ public class RPN {
         }
     }
 
-    public native double getResult(String str, double x);
+    public native double getResult(String str, double x) throws NativeCalculationException;
     public native void  clean();
     public native List<Point> graphBuilder(double[] data, String expression);
 }
