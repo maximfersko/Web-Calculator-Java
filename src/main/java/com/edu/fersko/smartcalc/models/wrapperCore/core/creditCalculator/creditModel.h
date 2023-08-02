@@ -15,11 +15,6 @@ struct creditData {
 };
 
 class creditModel {
-public:
-  using data_c_t_ = creditData;
-
-private:
-  data_c_t_ data_;
 
 public:
   creditModel() = default;
@@ -27,10 +22,15 @@ public:
 
   void annuity(double summa, double period, double rate);
   void deffirentated(double summa, double rate, double period);
+  void clear();
+  creditData getResult() { return data_; }
+
+
+  private:
+  creditData data_;
+
   void validate(double period, double rate, double creditSum);
   double round(double number);
-  void clear();
-  data_c_t_ getResult() { return data_; }
 };
 
 }; // namespace model

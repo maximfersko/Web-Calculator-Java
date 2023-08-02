@@ -1,18 +1,20 @@
 package com.edu.fersko.smartcalc.models;
 
+
+
 import org.springframework.stereotype.Component;
 
-import java.io.*;
-import java.nio.file.Paths;
 import java.util.List;
 
 import static com.edu.fersko.smartcalc.models.NativeLibraryLoader.getLibraryPath;
 
+
 @Component
-public class RPN {
+public class SmartCalcJNIWrapper {
+
     static {
         try {
-            String libraryPath = getLibraryPath();
+            String libraryPath = getLibraryPath(true);
             System.load(libraryPath);
         } catch (UnsatisfiedLinkError e) {
             e.printStackTrace();
