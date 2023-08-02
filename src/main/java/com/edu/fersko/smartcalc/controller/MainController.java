@@ -2,7 +2,7 @@ package com.edu.fersko.smartcalc.controller;
 
 import com.edu.fersko.smartcalc.models.NativeCalculationException;
 import com.edu.fersko.smartcalc.models.Point;
-import com.edu.fersko.smartcalc.models.RPN;
+import com.edu.fersko.smartcalc.models.CoreSmartCalc;
 import com.edu.fersko.smartcalc.models.ResultResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +22,14 @@ import java.util.Map;
 
 @Controller
 public class MainController {
-    private final RPN rpn;
+    private final CoreSmartCalc coreSmartCalc;
 
     private final CalculatorUtilitiesService service;
 
 
     @Autowired
-    public MainController(RPN rpn, CalculatorUtilitiesService service) {
-        this.rpn = rpn;
+    public MainController(CoreSmartCalc coreSmartCalc, CalculatorUtilitiesService service) {
+        this.coreSmartCalc = coreSmartCalc;
         this.service = service;
         this.service.loadHistory();
     }
@@ -54,7 +54,7 @@ public class MainController {
         double result;
 
         try {
-            result = rpn.getResult(expression, 0);
+            result = coreSmartCalc.getResult(expression, 0);
         } catch (NativeCalculationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResultResponse("Error during calculation"));
         }
@@ -94,7 +94,7 @@ public class MainController {
         double step = Double.parseDouble(requestBody.get("step"));
 
 
-        List<Point> points = rpn.graphBuilder(null, expression);
+        List<Point> points = coreSmartCalc.graphBuilder(null, expression);
 
         return ResponseEntity.ok(points);
     }

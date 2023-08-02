@@ -2,14 +2,12 @@ package com.edu.fersko.smartcalc.models;
 
 import org.springframework.stereotype.Component;
 
-import java.io.*;
-import java.nio.file.Paths;
 import java.util.List;
 
 import static com.edu.fersko.smartcalc.models.NativeLibraryLoader.getLibraryPath;
 
 @Component
-public class RPN {
+public class CoreSmartCalc {
     static {
         try {
             String libraryPath = getLibraryPath();

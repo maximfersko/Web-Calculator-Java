@@ -63,7 +63,44 @@
         </div>
 
         <div id="creditCalculator" class="calculator">
-            
+            <form id="creditForm">
+                <div class="input-wrapper">
+                    <label for="amour">Loan Amour:</label>
+                    <input type="number" id="amour" name="amour" maxlength="15" required>
+                </div>
+                <div class="input-wrapper">
+                    <label for="term">Loan Term (months):</label>
+                    <input type="number" id="term" name="term" maxlength="4" required>
+                </div>
+                <div class="input-wrapper">
+                    <label for="rate">Interest Rate (%):</label>
+                    <input type="number" id="rate" name="rate" maxlength="4" required>
+                </div>
+
+                <div class="calc-type-wrapper">
+                    <label for="annuity">Annuity:</label>
+                    <input type="radio" id="annuity" name="calcType" value="annuity" checked>
+                    <label for="differentiated">Differentiated:</label>
+                    <input type="radio" id="differentiated" name="calcType" value="differentiated">
+                </div>
+
+                <button type="button" onclick="calculateCredit()" class="btn-calc">Calculate</button>
+            </form>
+
+            <div class="output">
+                <div class="result-field">
+                    <label for="monthlyPayment">Monthly Payment:</label>
+                    <input type="text" id="monthlyPayment" disabled>
+                </div>
+                <div class="result-field">
+                    <label for="totalInterest">Total Interest:</label>
+                    <input type="text" id="totalInterest" disabled>
+                </div>
+                <div class="result-field">
+                    <label for="totalPayment">Total Payment:</label>
+                    <input type="text" id="totalPayment" disabled>
+                </div>
+            </div>
         </div>
 
         <div id="infoCalculator" class="calculator">
