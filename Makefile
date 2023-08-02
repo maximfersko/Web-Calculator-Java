@@ -4,7 +4,8 @@ DIR_SOURCE_CALCULATOR = src/main/java/com/edu/fersko/smartcalc/models/wrapperCor
 SMART_CALCULATOR = smartCalculator
 CREDIT_CALCULATOR = creditCalculator
 DIR_SOURCE_WRAPPER_CORE = src/main/java/com/edu/fersko/smartcalc/models/wrapperCore
-WRAPPER_SMART_CALCULATOR_FILE = com_edu_fersko_smartcalc_models_RPN
+WRAPPER_SMART_CALCULATOR_FILE = com_edu_fersko_smartcalc_models_SmartCalcJNIWrapper
+WRAPPER_CREDIT_CALCULATOR_FILE = com_edu_fersko_smartcalc_models_CreditModelJNIWrapper
 SOURCE = $(wildcard $(DIR_SOURCE_CORE)/*.cc) $(wildcard $(DIR_SOURCE_CALCULATOR)/*.cc)
 JNI_INCLUDE_PATH = "C:\Program Files\Java\jdk-17\include"
 JNI_INCLUDE_PATH_MACOS = "$(JAVA_HOME)/Include"
@@ -21,7 +22,8 @@ windows:
 															$(DIR_SOURCE_CALCULATOR)/$(SMART_CALCULATOR)/*.cc \
 															$(DIR_SOURCE_WRAPPER_CORE)/$(WRAPPER_SMART_CALCULATOR_FILE).cc
 	$(CXX) $(FLAGS) -I$(JNI_INCLUDE_PATH_WIN) -I$(JNI_INCLUDE_PATH) -o $(PATH_LIB)/$(LIB_CREDIT_NAME).dll \
-															$(DIR_SOURCE_CALCULATOR)/$(CREDIT_CALCULATOR)/*.cc
+															$(DIR_SOURCE_CALCULATOR)/$(CREDIT_CALCULATOR)/*.cc \
+															$(DIR_SOURCE_WRAPPER_CORE)/$(WRAPPER_CREDIT_CALCULATOR_FILE).cc
 
 
 macos:

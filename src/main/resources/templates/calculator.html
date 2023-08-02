@@ -19,89 +19,89 @@
                 </ul>
             </div>
         </nav>
-       <div class="calculator-wrapper">
-        <div id="mainCalculator" class="calculator">
-            <form action="/calculate" method="post">
-                <div class="expression-field">
-                    <div id="expressionLabel" class="input-output" th:text="${result}"></div>
-                </div>
-                <div class="buttons">
-                    <button type="button" onclick="handleButtonClick('0')">0</button>
-                    <button type="button" onclick="handleButtonClick('1')">1</button>
-                    <button type="button" onclick="handleButtonClick('2')">2</button>
-                    <button type="button" onclick="handleButtonClick('3')">3</button>
-                    <button type="button" onclick="clearInput()">AC</button>
-                    <button type="button" onclick="handleButtonClick('4')">4</button>
-                    <button type="button" onclick="handleButtonClick('5')">5</button>
-                    <button type="button" onclick="handleButtonClick('6')">6</button>
-                    <button type="button" onclick="handleButtonClick('7')">7</button>
-                    <button type="button" onclick="handleButtonClick('8')">8</button>
-                    <button type="button" onclick="handleButtonClick('9')">9</button>
-                    <button type="button" onclick="handleButtonClick('+')">+</button>
-                    <button type="button" onclick="handleButtonClick('-')">-</button>
-                    <button type="button" onclick="handleButtonClick('*')">*</button>
-                    <button type="button" onclick="handleButtonClick('/')">/</button>
-                    <button type="button" onclick="handleButtonClick('^')">^</button>
-                    <button type="button" onclick="handleButtonClick('cos')">cos</button>
-                    <button type="button" onclick="handleButtonClick('sin')">sin</button>
-                    <button type="button" onclick="handleButtonClick('tan')">tan</button>
-                    <button type="button" onclick="handleButtonClick('atan')">atan</button>
-                    <button type="button" onclick="handleButtonClick('acos')">acos</button>
-                    <button type="button" onclick="handleButtonClick('asin')">asin</button>
-                    <button type="button" onclick="handleButtonClick('log')">log</button>
-                    <button type="button" onclick="handleButtonClick('ln')">ln</button>
-                    <button type="button" onclick="handleButtonClick('(')">(</button>
-                    <button type="button" onclick="handleButtonClick(')')">)</button>
-                    <button type="button" onclick="handleButtonClick('mod')">mod</button>
-                    <button type="button" onclick="handleButtonClick('.')">.</button>
-                    <button type="button" onclick="handleButtonClick('√')">√</button>
-                    <button type="button" onclick="handleButtonClick('x')">x</button>
-                    <button type="button" class="btn-calc" onclick="calculateWithX()">=</button>
-                    <button type="button" onclick="toggleHistory()">History</button>
-                </div>
-            </form>
-        </div>
-
-        <div id="creditCalculator" class="calculator">
-            <form id="creditForm">
-                <div class="input-wrapper">
-                    <label for="amour">Loan Amour:</label>
-                    <input type="number" id="amour" name="amour" maxlength="15" required>
-                </div>
-                <div class="input-wrapper">
-                    <label for="term">Loan Term (months):</label>
-                    <input type="number" id="term" name="term" maxlength="4" required>
-                </div>
-                <div class="input-wrapper">
-                    <label for="rate">Interest Rate (%):</label>
-                    <input type="number" id="rate" name="rate" maxlength="4" required>
-                </div>
-
-                <div class="calc-type-wrapper">
-                    <label for="annuity">Annuity:</label>
-                    <input type="radio" id="annuity" name="calcType" value="annuity" checked>
-                    <label for="differentiated">Differentiated:</label>
-                    <input type="radio" id="differentiated" name="calcType" value="differentiated">
-                </div>
-
-                <button type="button" onclick="calculateCredit()" class="btn-calc">Calculate</button>
-            </form>
-
-            <div class="output">
-                <div class="result-field">
-                    <label for="monthlyPayment">Monthly Payment:</label>
-                    <input type="text" id="monthlyPayment" disabled>
-                </div>
-                <div class="result-field">
-                    <label for="totalInterest">Total Interest:</label>
-                    <input type="text" id="totalInterest" disabled>
-                </div>
-                <div class="result-field">
-                    <label for="totalPayment">Total Payment:</label>
-                    <input type="text" id="totalPayment" disabled>
-                </div>
+        <div class="calculator-wrapper">
+            <div id="mainCalculator" class="calculator">
+                <form action="/calculate" method="post">
+                    <div class="expression-field">
+                        <div id="expressionLabel" class="input-output" th:text="${result}"></div>
+                    </div>
+                    <div class="buttons">
+                        <button type="button" onclick="handleButtonClick('0')">0</button>
+                        <button type="button" onclick="handleButtonClick('1')">1</button>
+                        <button type="button" onclick="handleButtonClick('2')">2</button>
+                        <button type="button" onclick="handleButtonClick('3')">3</button>
+                        <button type="button" onclick="clearInput()">AC</button>
+                        <button type="button" onclick="handleButtonClick('4')">4</button>
+                        <button type="button" onclick="handleButtonClick('5')">5</button>
+                        <button type="button" onclick="handleButtonClick('6')">6</button>
+                        <button type="button" onclick="handleButtonClick('7')">7</button>
+                        <button type="button" onclick="handleButtonClick('8')">8</button>
+                        <button type="button" onclick="handleButtonClick('9')">9</button>
+                        <button type="button" onclick="handleButtonClick('+')">+</button>
+                        <button type="button" onclick="handleButtonClick('-')">-</button>
+                        <button type="button" onclick="handleButtonClick('*')">*</button>
+                        <button type="button" onclick="handleButtonClick('/')">/</button>
+                        <button type="button" onclick="handleButtonClick('^')">^</button>
+                        <button type="button" onclick="handleButtonClick('cos')">cos</button>
+                        <button type="button" onclick="handleButtonClick('sin')">sin</button>
+                        <button type="button" onclick="handleButtonClick('tan')">tan</button>
+                        <button type="button" onclick="handleButtonClick('atan')">atan</button>
+                        <button type="button" onclick="handleButtonClick('acos')">acos</button>
+                        <button type="button" onclick="handleButtonClick('asin')">asin</button>
+                        <button type="button" onclick="handleButtonClick('log')">log</button>
+                        <button type="button" onclick="handleButtonClick('ln')">ln</button>
+                        <button type="button" onclick="handleButtonClick('(')">(</button>
+                        <button type="button" onclick="handleButtonClick(')')">)</button>
+                        <button type="button" onclick="handleButtonClick('mod')">mod</button>
+                        <button type="button" onclick="handleButtonClick('.')">.</button>
+                        <button type="button" onclick="handleButtonClick('√')">√</button>
+                        <button type="button" onclick="handleButtonClick('x')">x</button>
+                        <button type="button" class="btn-calc" onclick="calculateWithX()">=</button>
+                        <button type="button" onclick="toggleHistory()">History</button>
+                    </div>
+                </form>
             </div>
-        </div>
+
+           <div id="creditCalculator" class="calculator">
+               <form id="creditForm">
+                   <div class="input-wrapper">
+                       <label for="amour">Loan Amount:</label>
+                       <input type="number" id="amour" name="amour" maxlength="15" required>
+                   </div>
+                   <div class="input-wrapper">
+                       <label for="term">Loan Term (months):</label>
+                       <input type="number" id="term" name="term" maxlength="4" required>
+                   </div>
+                   <div class="input-wrapper">
+                       <label for="rate">Interest Rate (%):</label>
+                       <input type="number" id="rate" name="rate" maxlength="4" required>
+                   </div>
+
+                   <div class="calc-type-wrapper">
+                       <label for="annuity">Annuity:</label>
+                       <input type="radio" id="annuity" name="calcType" value="annuity" checked>
+                       <label for="differentiated">Differentiated:</label>
+                       <input type="radio" id="differentiated" name="calcType" value="differentiated">
+                   </div>
+
+                   <button type="button" onclick="calculateCredit()" class="btn-calc">Calculate</button>
+               </form>
+
+               <div class="output">
+                   <div class="result-field">
+                       <label for="monthlyPayment">Monthly Payment:</label>
+                       <input type="text" id="monthlyPayment" disabled>
+                   </div>
+                   <div class="result-field">
+                       <label for="totalInterest">Total Interest:</label>
+                       <input type="text" id="totalInterest" disabled>
+                   </div>
+                   <div class="result-field">
+                       <label for="totalPayment">Total Payment:</label>
+                       <input type="text" id="totalPayment" disabled>
+                   </div>
+               </div>
+           </div>
 
         <div id="infoCalculator" class="calculator">
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta cumque perferendis omnis hic </p>

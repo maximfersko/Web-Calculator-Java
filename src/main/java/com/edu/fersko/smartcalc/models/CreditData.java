@@ -18,5 +18,31 @@ public class CreditData {
         this.payments = payments;
     }
 
+    public CreditData() {
 
+    }
+
+    public double getOverPayment() {
+        return overPayment;
+    }
+
+    public double getMinMonthlyPayment() {
+        return minMonthlyPayment;
+    }
+
+    public double getMaxMonthlyPayment() {
+        return maxMonthlyPayment;
+    }
+
+    public double getPayments() {
+        return payments;
+    }
+
+    public double getMonthlyPayment() {
+        return monthlyPayment;
+    }
+
+    public double getTotalPayment() {
+        return totalPayment;
+    }
 }
