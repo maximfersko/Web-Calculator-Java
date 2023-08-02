@@ -16,22 +16,36 @@ LIB_SMART_NAME = SmartCore
 LIB_CREDIT_NAME = CreditCore
 PATH_LIB = src/main/java/com/edu/fersko/smartcalc/models/lib
 
+.PHONY: clean
 
-windows:
-	$(CXX) $(FLAGS) -I$(JNI_INCLUDE_PATH_WIN) -I$(JNI_INCLUDE_PATH) -o $(PATH_LIB)/$(LIB_SMART_NAME).dll \
-															$(DIR_SOURCE_CALCULATOR)/$(SMART_CALCULATOR)/*.cc \
-															$(DIR_SOURCE_WRAPPER_CORE)/$(WRAPPER_SMART_CALCULATOR_FILE).cc
-	$(CXX) $(FLAGS) -I$(JNI_INCLUDE_PATH_WIN) -I$(JNI_INCLUDE_PATH) -o $(PATH_LIB)/$(LIB_CREDIT_NAME).dll \
-															$(DIR_SOURCE_CALCULATOR)/$(CREDIT_CALCULATOR)/*.cc \
-															$(DIR_SOURCE_WRAPPER_CORE)/$(WRAPPER_CREDIT_CALCULATOR_FILE).cc
+default:  lib
 
+ifeq ($(OS),Windows_NT)
+    LIB_EXT = .dll
+    JNI_INCLUDE = $(JNI_INCLUDE_PATH)
+    JNI_INCLUDE_MD = $(JNI_INCLUDE_PATH_WIN)
+    RM_CMD = Remove-Item
+else
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Darwin)
+        LIB_EXT = .so
+        JNI_INCLUDE = $(JNI_INCLUDE_PATH_MACOS)
+        JNI_INCLUDE_MD = $(JNI_INCLUDE_PATH_MACOS_MD)
+        RM_CMD = rm -f
+    else
+        $(error Unsupported operating system)
+    endif
+endif
 
-macos:
-	$(CXX) $(FLAGS) -I$(JNI_INCLUDE_PATH_MACOS) -I$(JNI_INCLUDE_PATH_MACOS_MD) -o \
-														$(PATH_LIB)/$(LIB_SMART_NAME).so \
+JNI = -I$(JNI_INCLUDE) -I$(JNI_INCLUDE_MD)
+
+lib:
+	$(CXX) $(FLAGS) $(JNI) -o $(PATH_LIB)/$(LIB_SMART_NAME).$(LIB_EXT) \
 														$(DIR_SOURCE_CALCULATOR)/$(SMART_CALCULATOR)/*.cc \
-                                                        $(DIR_SOURCE_WRAPPER_CORE)/$(WRAPPER_SMART_CALCULATOR_FILE).cc
-	$(CXX)  $(FLAGS) -I$(JNI_INCLUDE_PATH_MACOS) -I$(JNI_INCLUDE_PATH_MACOS_MD) -o \
-            											 $(PATH_LIB)/$(LIB_CREDIT_NAME).so \
-            										     $(DIR_SOURCE_CALCULATOR)/$(CREDIT_CALCULATOR)/*.cc \
-                                                         $(DIR_SOURCE_WRAPPER_CORE)/$(WRAPPER_CREDIT_CALCULATOR_FILE).cc
+														$(DIR_SOURCE_WRAPPER_CORE)/$(WRAPPER_SMART_CALCULATOR_FILE).cc
+	$(CXX) $(FLAGS) $(JNI) -o $(PATH_LIB)/$(LIB_CREDIT_NAME).$(LIB_EXT) \
+														$(DIR_SOURCE_CALCULATOR)/$(CREDIT_CALCULATOR)/*.cc \
+														$(DIR_SOURCE_WRAPPER_CORE)/$(WRAPPER_CREDIT_CALCULATOR_FILE).cc
+
+clean:
+	$(RM_CMD) $(PATH_LIB)/*.so $(PATH_LIB)/*.dll
