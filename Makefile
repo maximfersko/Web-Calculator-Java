@@ -18,17 +18,17 @@ PATH_LIB = src/main/java/com/edu/fersko/smartcalc/models/lib
 
 .PHONY: clean
 
-default:  lib
+default: clean lib
 
 ifeq ($(OS),Windows_NT)
-    LIB_EXT = .dll
+    LIB_EXT = dll
     JNI_INCLUDE = $(JNI_INCLUDE_PATH)
     JNI_INCLUDE_MD = $(JNI_INCLUDE_PATH_WIN)
     RM_CMD = Remove-Item
 else
     UNAME_S := $(shell uname -s)
     ifeq ($(UNAME_S),Darwin)
-        LIB_EXT = .so
+        LIB_EXT = so
         JNI_INCLUDE = $(JNI_INCLUDE_PATH_MACOS)
         JNI_INCLUDE_MD = $(JNI_INCLUDE_PATH_MACOS_MD)
         RM_CMD = rm -f
