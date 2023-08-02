@@ -28,6 +28,8 @@ windows:
 
 macos:
 	$(CXX) $(FLAGS) -I$(JNI_INCLUDE_PATH_MACOS) -I$(JNI_INCLUDE_PATH_MACOS_MD) -o \
-														$(PATH_LIB)/$(LIB_NAME).so \
-														$(SOURCE) \
-							                            $(DIR_SOURCE_WRAPPER_CORE)/$(WRAPPER_CORE_FILE).cc
+													 in
+							                            pattern)
+
+							                              ;;
+							                            esacеIR_SOURCE_WRAPPER_CORE)/$(WRAPPER_CORE_FILE).cc
