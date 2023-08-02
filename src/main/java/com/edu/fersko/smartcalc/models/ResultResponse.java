@@ -8,7 +8,6 @@ public class ResultResponse {
 
     }
 
-    // Setters and getters for result and errorMessage (if needed)
     public void setResult(double result) {
         this.result = result;
     }
