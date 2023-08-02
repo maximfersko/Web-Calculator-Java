@@ -6,7 +6,6 @@ CREDIT_CALCULATOR = creditCalculator
 DIR_SOURCE_WRAPPER_CORE = src/main/java/com/edu/fersko/smartcalc/models/wrapperCore
 WRAPPER_SMART_CALCULATOR_FILE = com_edu_fersko_smartcalc_models_SmartCalcJNIWrapper
 WRAPPER_CREDIT_CALCULATOR_FILE = com_edu_fersko_smartcalc_models_CreditModelJNIWrapper
-SOURCE = $(wildcard $(DIR_SOURCE_CORE)/*.cc) $(wildcard $(DIR_SOURCE_CALCULATOR)/*.cc)
 JNI_INCLUDE_PATH = "C:\Program Files\Java\jdk-17\include"
 JNI_INCLUDE_PATH_MACOS = "$(JAVA_HOME)/Include"
 JNI_INCLUDE_PATH_MACOS_MD = "$(JNI_INCLUDE_PATH_MACOS)/Darwin"

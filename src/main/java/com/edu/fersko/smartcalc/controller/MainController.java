@@ -104,17 +104,14 @@ public class MainController {
         double interestRate = Double.parseDouble(requestBody.get("rate"));
         String calcType = requestBody.get("calcType");
 
-        // Call the appropriate native method from the creditModelWrapper
         if (calcType.equals("annuity")) {
             creditModelWrapper.annuity(loanAmount, loanTerm, interestRate);
         } else if (calcType.equals("differentiated")) {
             creditModelWrapper.deffirentated(loanAmount, interestRate, loanTerm);
         }
 
-        // Get the result from the creditModelWrapper
         CreditData data = creditModelWrapper.getResult();
 
-        // Prepare the response data
         Map<String, Double> responseData = new HashMap<>();
         responseData.put("monthlyPayment", data.getMonthlyPayment());
         responseData.put("overPayment", data.getOverPayment());
