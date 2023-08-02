@@ -28,8 +28,10 @@ windows:
 
 macos:
 	$(CXX) $(FLAGS) -I$(JNI_INCLUDE_PATH_MACOS) -I$(JNI_INCLUDE_PATH_MACOS_MD) -o \
-													 in
-							                            pattern)
-
-							                              ;;
-							                            esacеIR_SOURCE_WRAPPER_CORE)/$(WRAPPER_CORE_FILE).cc
+														$(PATH_LIB)/$(LIB_SMART_NAME).so \
+														$(DIR_SOURCE_CALCULATOR)/$(SMART_CALCULATOR)/*.cc \
+                                                        $(DIR_SOURCE_WRAPPER_CORE)/$(WRAPPER_SMART_CALCULATOR_FILE).cc
+	$(CXX)  $(FLAGS) -I$(JNI_INCLUDE_PATH_MACOS) -I$(JNI_INCLUDE_PATH_MACOS_MD) -o \
+            											 $(PATH_LIB)/$(LIB_CREDIT_NAME).so \
+            										     $(DIR_SOURCE_CALCULATOR)/$(CREDIT_CALCULATOR)/*.cc \
+                                                         $(DIR_SOURCE_WRAPPER_CORE)/$(WRAPPER_CREDIT_CALCULATOR_FILE).cc
