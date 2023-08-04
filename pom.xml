@@ -78,7 +78,6 @@
 						</exclude>
 					</excludes>
 					<mainClass>com.edu.fersko.smartcalc.Application</mainClass>
-					<!-- Replace 'com.edu.fersko.smartcalc.Application' with the fully qualified name of your main class -->
 				</configuration>
 			</plugin>
 		</plugins>
