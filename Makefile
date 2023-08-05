@@ -18,7 +18,7 @@ ifeq ($(OS),Windows_NT)
     LIB_EXT = dll
     JNI_INCLUDE = $(JNI_INCLUDE_PATH)
     JNI_INCLUDE_MD = $(JNI_INCLUDE_PATH_WIN)
-    RM = del /Q
+    RM = Remove-Item
 else
     UNAME_S := $(shell uname -s)
     ifeq ($(UNAME_S),Darwin)
@@ -36,6 +36,10 @@ JNI = -I$(JNI_INCLUDE) -I$(JNI_INCLUDE_MD)
 SRC_SMART = $(wildcard $(SRC_CALCULATOR)/$(SMART_CALCULATOR)/*.cc)
 SRC_CREDIT = $(wildcard $(SRC_CALCULATOR)/$(CREDIT_CALCULATOR)/*.cc)
 SRC_WRAPPERS = $(SRC_WRAPPER_CORE)/$(WRAPPER_SMART_CALCULATOR_FILE).cc $(SRC_WRAPPER_CORE)/$(WRAPPER_CREDIT_CALCULATOR_FILE).cc
+
+.PHONY: clean
+
+default: lib
 
 all: lib
 
