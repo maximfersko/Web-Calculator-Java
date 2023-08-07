@@ -40,11 +40,11 @@ function clearHistory() {
     historyList.innerHTML = "";
 
     fetch('/clearHistory', {
-        method: 'POST',
-    })
+            method: 'POST',
+        })
         .then((response) => response.text())
         .then((data) => {
-            console.log(data); 
+            console.log(data);
         })
         .catch((error) => {
             console.error('Error clearing history:', error);
@@ -69,6 +69,7 @@ function setXValue() {
 
     evaluateExpression();
 }
+
 function evaluateExpression() {
     let expressionLabel = document.getElementById("expressionLabel");
     let expression = expressionLabel.innerText.trim();
@@ -79,12 +80,14 @@ function evaluateExpression() {
     }
 
     fetch('/calculate', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ expression }),
-    })
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                expression
+            }),
+        })
         .then((response) => response.json())
         .then((data) => {
             let result;
@@ -124,10 +127,12 @@ function fetchHistory() {
     fetch('/history')
         .then((response) => response.json())
         .then((data) => {
-            const historyList = document.getElementById("historyList");
+            const historyList = document.getElementById(
+                "historyList");
             historyList.innerHTML = "";
             data.forEach((item) => {
-                const historyItem = document.createElement("li");
+                const historyItem = document
+                    .createElement("li");
                 historyItem.textContent = item;
                 historyList.appendChild(historyItem);
             });
@@ -145,4 +150,3 @@ function toggleHistory() {
         fetchHistory();
     }
 }
-

@@ -1,33 +1,28 @@
 .o {
-    color: darkmagenta;
-    margin-bottom: 15px;
+     color: darkmagenta;
+     margin-bottom: 15px;
 }
-
-.uiu {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    height: 500px;
-    width: 700px;
+ .uiu {
+     display: block;
+     margin-left: auto;
+     margin-right: auto;
+     height: 500px;
+     width: 700px;
 }
-
-.tab {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin-left: -250px;
+ .tab {
+     display: flex;
+     align-items: center;
+     justify-content: space-around;
+     margin-left: -250px;
 }
-
-.func {
-    margin-left: -450px;
+ .func {
+     margin-left: -450px;
 }
-
-.calc {
-    margin-top: 50px;
+ .calc {
+     margin-top: 50px;
 }
-
-#infoCalculator {
-    display: none;
-    width: 80% !important;
-    overflow: auto;
-  }
+ #infoCalculator {
+     display: none;
+     width: 80% !important;
+     overflow: auto;
+}

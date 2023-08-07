@@ -1,6 +1,8 @@
 function showCalculator(calculatorName) {
-    const calculatorContainers = document.querySelectorAll('.calculator');
-    const calculatorWrapper = document.querySelector('.calculator-wrapper');
+    const calculatorContainers = document.querySelectorAll(
+        '.calculator');
+    const calculatorWrapper = document.querySelector(
+        '.calculator-wrapper');
 
     calculatorContainers.forEach(container => {
         if (container.id === calculatorName + 'Calculator') {
@@ -16,6 +18,7 @@ function showCalculator(calculatorName) {
     }, 50);
 
     calculatorWrapper.addEventListener('animationend', () => {
-        calculatorWrapper.classList.remove('animate-slide-up');
+        calculatorWrapper.classList.remove(
+        'animate-slide-up');
     });
 }
