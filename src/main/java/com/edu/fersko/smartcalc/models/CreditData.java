@@ -8,8 +8,8 @@ public class CreditData {
     private double maxMonthlyPayment;
     private double payments;
 
-
-    public CreditData(double totalPayment, double monthlyPayment, double overPayment, double minMonthlyPayment, double maxMonthlyPayment, double payments) {
+    public CreditData(double totalPayment, double monthlyPayment, double overPayment,
+                      double minMonthlyPayment, double maxMonthlyPayment, double payments) {
         this.totalPayment = totalPayment;
         this.monthlyPayment = monthlyPayment;
         this.overPayment = overPayment;

@@ -9,7 +9,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 public class CreditModelJNIWrapperTest {
     private static final double DELTA = 0.1;
     private static CreditModelJNIWrapper creditCalculator;
@@ -34,9 +33,9 @@ public class CreditModelJNIWrapperTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/creditDiffenrented.csv")
     public void testCreditDiffenrennted(double amount, int term, double rate,
-                                  double minExpectedMonthlyPayment, double maxExpectedMonthlyPayment,
-                                  double expectedOverPayment,
-                                  double expectedTotalPayment) {
+                                        double minExpectedMonthlyPayment, double maxExpectedMonthlyPayment,
+                                        double expectedOverPayment,
+                                        double expectedTotalPayment) {
         creditCalculator.deffirentated(amount, term, rate);
         assertEquals(minExpectedMonthlyPayment, Math.round(creditCalculator.getResult().getMinMonthlyPayment()), DELTA);
         assertEquals(maxExpectedMonthlyPayment, Math.round(creditCalculator.getResult().getMaxMonthlyPayment()), DELTA);

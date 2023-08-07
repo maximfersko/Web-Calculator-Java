@@ -24,7 +24,6 @@ public class MainController {
     private final CalculatorUtilitiesService service;
     private final CreditModelJNIWrapper creditModelWrapper;
 
-
     @Autowired
     public MainController(SmartCalcJNIWrapper coreSmartCalc, CalculatorUtilitiesService service) {
         this.coreSmartCalc = coreSmartCalc;
@@ -40,12 +39,12 @@ public class MainController {
 
     @GetMapping("/history")
     @ResponseBody
-    public List<String> getHistory() {
+    public List < String > getHistory() {
         return service.getHistory();
     }
 
     @PostMapping("/calculate")
-    public ResponseEntity<ResultResponse> calculate(@RequestBody Map<String, String> requestBody) {
+    public ResponseEntity < ResultResponse > calculate(@RequestBody Map < String, String > requestBody) {
         String expression = requestBody.get("expression");
         double result;
 
@@ -65,11 +64,9 @@ public class MainController {
         return ResponseEntity.ok(resultResponse);
     }
 
-
-
     @PostMapping("/clearHistory")
     @ResponseBody
-    public ResponseEntity<String> clearHistory() {
+    public ResponseEntity < String > clearHistory() {
         service.getHistory().clear();
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CalculatorUtilitiesService.getHistoryFilePath()))) {
@@ -83,22 +80,20 @@ public class MainController {
 
     @PostMapping("/calculateGraph")
     @ResponseBody
-    public ResponseEntity<List<Point>> calculateGraph(@RequestBody @NotNull Map<String, String> requestBody) {
+    public ResponseEntity < List < Point >> calculateGraph(@RequestBody @NotNull Map < String, String > requestBody) {
         String expression = requestBody.get("expression");
         double xStart = Double.parseDouble(requestBody.get("xStart"));
         double xEnd = Double.parseDouble(requestBody.get("xEnd"));
         double step = Double.parseDouble(requestBody.get("step"));
 
-
-        List<Point> points = coreSmartCalc.graphBuilder(null, expression);
+        List < Point > points = coreSmartCalc.graphBuilder(null, expression);
 
         return ResponseEntity.ok(points);
     }
 
-
     @PostMapping("/calculateCredit")
     @ResponseBody
-    public ResponseEntity<Map<String, Double>> calculateCredit(@RequestBody Map<String, String> requestBody) {
+    public ResponseEntity < Map < String, Double >> calculateCredit(@RequestBody Map < String, String > requestBody) {
         double loanAmount = Double.parseDouble(requestBody.get("amour"));
         int loanTerm = Integer.parseInt(requestBody.get("term"));
         double interestRate = Double.parseDouble(requestBody.get("rate"));
@@ -112,7 +107,7 @@ public class MainController {
 
         CreditData data = creditModelWrapper.getResult();
 
-        Map<String, Double> responseData = new HashMap<>();
+        Map < String, Double > responseData = new HashMap < > ();
         responseData.put("monthlyPayment", data.getMonthlyPayment());
         responseData.put("overPayment", data.getOverPayment());
         responseData.put("totalPayment", data.getTotalPayment());
@@ -121,6 +116,5 @@ public class MainController {
 
         return ResponseEntity.ok(responseData);
     }
-
 
 }

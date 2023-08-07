@@ -1,13 +1,10 @@
 package com.edu.fersko.smartcalc.models;
 
-
-
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 import static com.edu.fersko.smartcalc.models.NativeLibraryLoader.getLibraryPath;
-
 
 @Component
 public class SmartCalcJNIWrapper {
@@ -22,6 +19,6 @@ public class SmartCalcJNIWrapper {
     }
 
     public native double getResult(String str, double x) throws NativeCalculationException;
-    public native void  clean();
-    public native List<Point> graphBuilder(double[] data, String expression);
+    public native void clean();
+    public native List < Point > graphBuilder(double[] data, String expression);
 }
