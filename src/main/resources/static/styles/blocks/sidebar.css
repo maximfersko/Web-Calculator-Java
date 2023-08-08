@@ -1,23 +1,21 @@
 .sidebar {
-    position: fixed;
-    top: 20px;
-    right: -500px;
-    width: 320px;
-    min-height: 100px;
-    max-height: 100%;
-    background-color: #bbb8b8;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    font-family: 'Courier New', Courier, monospace;
-    font-size: medium;
-    transition: right 0.3s ease;
-    overflow-y: auto;
-    border-radius: 8px;
-    align-items: center;
-    justify-content: center;
+     position: fixed;
+     top: 20px;
+     right: -500px;
+     width: 320px;
+     min-height: 100px;
+     max-height: 100%;
+     background-color: #bbb8b8;
+     padding: 20px;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+     font-family: 'Courier New', Courier, monospace;
+     font-size: medium;
+     transition: right 0.3s ease;
+     overflow-y: auto;
+     border-radius: 8px;
+     align-items: center;
+     justify-content: center;
 }
-  
-.sidebar.open {
-    right: 20px; 
+ .sidebar.open {
+     right: 20px;
 }
-  

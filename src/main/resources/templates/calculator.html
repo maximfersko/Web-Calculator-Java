@@ -1,287 +1,291 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Web Calculator</title>
-        <link rel="stylesheet" type="text/css" href="styles/main.css">
-    </head>
-    <body>
-        <nav role="navigation">
-            <div id="menuToggle">
-                <input type="checkbox" />
-                <span></span>
-                <span></span>
-                <span></span>
-                <ul id="menu">
-                    <li><a onclick="showCalculator('main')">Smart Calculator</a></li>
-                    <li><a onclick="showCalculator('credit')">Credit Calculator</a></li>
-                    <li><a onclick="showCalculator('graphics')">Build Graphics</a></li>
-                    <li><a onclick="showCalculator('info')">Info</a></li>
-                </ul>
+<head>
+    <title>Web Calculator</title>
+    <link rel="stylesheet" type="text/css" href="styles/main.css" />
+</head>
+
+<body>
+<nav role="navigation">
+    <div id="menuToggle">
+        <input type="checkbox" /> <span></span> <span></span> <span></span>
+        <ul id="menu">
+            <li><a onclick="showCalculator('main')">Smart Calculator</a></li>
+            <li><a onclick="showCalculator('credit')">Credit Calculator</a></li>
+            <li><a onclick="showCalculator('graphics')">Build Graphics</a></li>
+            <li><a onclick="showCalculator('info')">Info</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="calculator-wrapper">
+    <div id="mainCalculator" class="calculator">
+        <form action="/calculate" method="post">
+            <div class="expression-field">
+                <div id="expressionLabel" class="input-output" th:text="${result}"></div>
             </div>
-        </nav>
-        <div class="calculator-wrapper">
-            <div id="mainCalculator" class="calculator">
-                <form action="/calculate" method="post">
-                    <div class="expression-field">
-                        <div id="expressionLabel" class="input-output" th:text="${result}"></div>
-                    </div>
-                    <div class="buttons">
-                        <button type="button" onclick="handleButtonClick('0')">0</button>
-                        <button type="button" onclick="handleButtonClick('1')">1</button>
-                        <button type="button" onclick="handleButtonClick('2')">2</button>
-                        <button type="button" onclick="handleButtonClick('3')">3</button>
-                        <button type="button" onclick="clearInput()">AC</button>
-                        <button type="button" onclick="handleButtonClick('4')">4</button>
-                        <button type="button" onclick="handleButtonClick('5')">5</button>
-                        <button type="button" onclick="handleButtonClick('6')">6</button>
-                        <button type="button" onclick="handleButtonClick('7')">7</button>
-                        <button type="button" onclick="handleButtonClick('8')">8</button>
-                        <button type="button" onclick="handleButtonClick('9')">9</button>
-                        <button type="button" onclick="handleButtonClick('+')">+</button>
-                        <button type="button" onclick="handleButtonClick('-')">-</button>
-                        <button type="button" onclick="handleButtonClick('*')">*</button>
-                        <button type="button" onclick="handleButtonClick('/')">/</button>
-                        <button type="button" onclick="handleButtonClick('^')">^</button>
-                        <button type="button" onclick="handleButtonClick('cos')">cos</button>
-                        <button type="button" onclick="handleButtonClick('sin')">sin</button>
-                        <button type="button" onclick="handleButtonClick('tan')">tan</button>
-                        <button type="button" onclick="handleButtonClick('atan')">atan</button>
-                        <button type="button" onclick="handleButtonClick('acos')">acos</button>
-                        <button type="button" onclick="handleButtonClick('asin')">asin</button>
-                        <button type="button" onclick="handleButtonClick('log')">log</button>
-                        <button type="button" onclick="handleButtonClick('ln')">ln</button>
-                        <button type="button" onclick="handleButtonClick('(')">(</button>
-                        <button type="button" onclick="handleButtonClick(')')">)</button>
-                        <button type="button" onclick="handleButtonClick('mod')">mod</button>
-                        <button type="button" onclick="handleButtonClick('.')">.</button>
-                        <button type="button" onclick="handleButtonClick('√')">√</button>
-                        <button type="button" onclick="handleButtonClick('x')">x</button>
-                        <button type="button" class="btn-calc" onclick="calculateWithX()">=</button>
-                        <button type="button" onclick="toggleHistory()">History</button>
-                    </div>
-                </form>
+            <div class="buttons">
+                <button type="button" onclick="handleButtonClick('0')">0</button>
+                <button type="button" onclick="handleButtonClick('1')">1</button>
+                <button type="button" onclick="handleButtonClick('2')">2</button>
+                <button type="button" onclick="handleButtonClick('3')">3</button>
+                <button type="button" onclick="clearInput()">AC</button>
+                <button type="button" onclick="handleButtonClick('4')">4</button>
+                <button type="button" onclick="handleButtonClick('5')">5</button>
+                <button type="button" onclick="handleButtonClick('6')">6</button>
+                <button type="button" onclick="handleButtonClick('7')">7</button>
+                <button type="button" onclick="handleButtonClick('8')">8</button>
+                <button type="button" onclick="handleButtonClick('9')">9</button>
+                <button type="button" onclick="handleButtonClick('+')">+</button>
+                <button type="button" onclick="handleButtonClick('-')">-</button>
+                <button type="button" onclick="handleButtonClick('*')">*</button>
+                <button type="button" onclick="handleButtonClick('/')">/</button>
+                <button type="button" onclick="handleButtonClick('^')">^</button>
+                <button type="button" onclick="handleButtonClick('cos')">cos</button>
+                <button type="button" onclick="handleButtonClick('sin')">sin</button>
+                <button type="button" onclick="handleButtonClick('tan')">tan</button>
+                <button type="button" onclick="handleButtonClick('atan')">atan</button>
+                <button type="button" onclick="handleButtonClick('acos')">acos</button>
+                <button type="button" onclick="handleButtonClick('asin')">asin</button>
+                <button type="button" onclick="handleButtonClick('log')">log</button>
+                <button type="button" onclick="handleButtonClick('ln')">ln</button>
+                <button type="button" onclick="handleButtonClick('(')">(</button>
+                <button type="button" onclick="handleButtonClick(')')">)</button>
+                <button type="button" onclick="handleButtonClick('mod')">mod</button>
+                <button type="button" onclick="handleButtonClick('.')">.</button>
+                <button type="button" onclick="handleButtonClick('√')">√</button>
+                <button type="button" onclick="handleButtonClick('x')">x</button>
+                <button type="button" class="btn-calc" onclick="calculateWithX()">=</button>
+                <button type="button" onclick="toggleHistory()">History</button>
             </div>
-
-           <div id="creditCalculator" class="calculator">
-               <form id="creditForm">
-                   <div class="input-wrapper">
-                       <label for="amour">Loan Amount:</label>
-                       <input type="number" id="amour" name="amour" maxlength="15" required>
-                   </div>
-                   <div class="input-wrapper">
-                       <label for="term">Loan Term (months):</label>
-                       <input type="number" id="term" name="term" maxlength="4" required>
-                   </div>
-                   <div class="input-wrapper">
-                       <label for="rate">Interest Rate (%):</label>
-                       <input type="number" id="rate" name="rate" maxlength="4" required>
-                   </div>
-
-                   <div class="calc-type-wrapper">
-                       <label for="annuity">Annuity:</label>
-                       <input type="radio" id="annuity" name="calcType" value="annuity" checked>
-                       <label for="differentiated">Differentiated:</label>
-                       <input type="radio" id="differentiated" name="calcType" value="differentiated">
-                   </div>
-
-                   <button type="button" onclick="calculateCredit()" class="btn-calc">Calculate</button>
-               </form>
-
-               <div class="output">
-                   <div class="result-field">
-                       <label for="monthlyPayment">Monthly Payment:</label>
-                       <input type="text" id="monthlyPayment" disabled>
-                   </div>
-                   <div class="result-field">
-                       <label for="totalInterest">Total Interest:</label>
-                       <input type="text" id="totalInterest" disabled>
-                   </div>
-                   <div class="result-field">
-                       <label for="totalPayment">Total Payment:</label>
-                       <input type="text" id="totalPayment" disabled>
-                   </div>
-               </div>
-           </div>
-
-        <div id="infoCalculator" class="calculator">
-            <section class="calc">
-                <h2 class="label_calc">Main Calculator</h2>
-                <h3>Smart calculator - divided into three blocks. This calculator - calculates arithmetic and binary operations with numbers, graph builder - builds a graph according to a given expression, credit calculator - has two types of credit: annuity, differentiated.</h3>
-                <h3 class="o">HOW TO USE:</h3>
-                <h3>All buttons of the screen are active.The calculation of the expression you entered is done by pressing the "=" button.When you enter x and press =, a dialog box will appear and ask you to drive the number to replace x.</h3>
-                <div class="tab">
-                    <table class="operators">
-                        <tr>
-                            <th>Operations</th>
-                        </tr>
-                        <tr>
-                            <th>Operator name</th>
-                            <th>Operator</th>
-                            <th>Description</th>
-                            <th>Example</th>
-                        </tr>
-                        <tr>
-                            <th>bracket</th>
-                            <th>( )</th>
-                            <th>takes the expression in brackets</th>
-                            <th> x - (y * z) </th>
-                        </tr>
-                        <tr>
-                            <th>plus</th>
-                            <th> + </th>
-                            <th>addition of two operands</th>
-                            <th>x + y</th>
-                        </tr>
-                        <tr>
-                            <th>minus</th>
-                            <th> - </th>
-                            <th>the difference of two operands</th>
-                            <th> x - y</th>
-                        </tr>
-                        <tr>
-                            <th>multiplication</th>
-                            <th> * </th>
-                            <th>product of two operands</th>
-                            <th>x * y</th>
-                        </tr>
-                        <tr>
-                            <th>division</th>
-                            <th>/</th>
-                            <th>division of two operands</th>
-                            <th>x / y</th>
-                        </tr>
-                        <tr>
-                            <th>exponentiation</th>
-                            <th> ^ </th>
-                            <th>exponentiation</th>
-                            <th>x ^ y</th>
-                        </tr>
-                        <tr>
-                            <th>remainder of division</th>
-                            <th>mod</th>
-                            <th>remainder of division</th>
-                            <th>x mod y</th>
-                        </tr>
-                        <tr>
-                            <th>unary minus</th>
-                            <th>-</th>
-                            <th>unary minus</th>
-                            <th>-x</th>
-                        </tr>
-                        <tr>
-                            <th>unary plus</th>
-                            <th>+</th>
-                            <th>unaru plus</th>
-                            <th>+a</th>
-                        </tr>
-                    </table>
-
-                    <table class="func">
-                        <tr>
-                            <th>Functions</th>
-                        </tr>
-                        <tr>
-                            <th>Function</th>
-                            <th>Description function</th>
-                        </tr>
-                        <tr>
-                            <th>cos(x)</th>
-                            <th>Computes cosine</th>
-                        </tr>
-                        <tr>
-                            <th>sin(x)</th>
-                            <th>Computes sine</th>
-                        </tr>
-                        <tr>
-                            <th>tan(x)</th>
-                            <th>Computes tangent</th>
-                        </tr>
-                        <tr>
-                            <th>acos(x)</th>
-                            <th>Computes arc cosine</th>
-                        </tr>
-                        <tr>
-                            <th>asin(x)</th>
-                            <th>Computes arc sine</th>
-                        </tr>
-                        <tr>
-                            <th>atan(x)</th>
-                            <th>Computes arc tangent</th>
-                            </th>
-                        <tr>
-                            <th>sqrt(x)</th>
-                            <th>Computes square root</th>
-                        </tr>
-                        <tr>
-                            <th>ln(x)</th>
-                            <th>Computes natural logarithm</th>
-                        </tr>
-                        <tr>
-                            <th>log(x)</th>
-                            <th>Computes common logarithm</th>
-                        </tr>
-                    </table>
-                </div>
-            </section>
-            <section class="graph">
-                <h2>Graph builder</h2>
-                <h3>Graph builders - plots the graph according to the output expression. The range is from - 1,000,000 to 1,000,000 inclusive.</h3>
-                <h3 class="o">HOW TO USE:</h3>
-                <h3>Entering x(min) and x(max) will set the range of the graph on the x-axis, entering <b>X</b> will set a point on the X-axis, entering <b>Y</b> will set a point on the Y-axis.Clicking on <b>custom</b> will clear your fields, clicking on <b>example</b> will set an example for a quick test of the Graph Builder utility</h3>
-            </section>
-            <section class="credit">
-                <h2>Credit Calculator</h2>
-                <h3>Loan Calculator - calculates your loan.  It has two types of credit: annuity, differentiated.</h3>
-                <h3 class="o">HOW TO USE:</h3>
-                <h3>At the entrance there are three parameters: the loan amount, term for which the loan is taken (in months), the interest rate, in accordance with these parameters and depending on the type of credit you selected, your repayment plan will be calculated.</h3>
-            </section>
-            <section class="deposit">
-                <h2>Deposit Calculator</h2>
-                <h3>
-                    deposit calculator - suitable for calculating deposits for a certain period, the functionality allows you to add and subtract from the principal amount, there is interest capitalization.</h3>
-                <h3 class="o">HOW TO USE:</h3>
-                <h3>
-                    Enter all the input data and click the calculate button.</h3>
-            </section>
-
-        </div>
-           <div id="graphicsCalculator" class="calculator">
-               <h2>Build Graphics</h2>
-               <form id="graphForm">
-                   <label for="graphExpression">Enter the expression:</label>
-                   <input type="text" id="graphExpression" required>
-                   <label for="xStart">X Start:</label>
-                   <input type="number" id="xStart" required>
-                   <label for="xEnd">X End:</label>
-                   <input type="number" id="xEnd" required>
-                   <label for="step">Step:</label>
-                   <input type="number" id="step" required>
-                   <button type="button" onclick="plotGraph()">Plot Graph</button>
-               </form>
-               <canvas id="graphContainer" width="800" height="400"></canvas>
-           </div>
-       </div>
-
-        <div id="modal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn" onclick="closeModal()">&times;</span>
-                <label for="x">Enter the value of x:</label>
-                <input type="number" id="xInput" name="x" required>
-                <button onclick="setXValue()">Calculate</button>
+        </form>
+    </div>
+    <div id="creditCalculator" class="calculator">
+        <form id="creditForm">
+            <div class="input-wrapper">
+                <label for="amour">Loan Amount:</label>
+                <input type="number" id="amour" name="amour" maxlength="15" required />
+            </div>
+            <div class="input-wrapper">
+                <label for="term">Loan Term (months):</label>
+                <input type="number" id="term" name="term" maxlength="4" required />
+            </div>
+            <div class="input-wrapper">
+                <label for="rate">Interest Rate (%):</label>
+                <input type="number" id="rate" name="rate" maxlength="4" required />
+            </div>
+            <div class="calc-type-wrapper">
+                <label for="annuity">Annuity:</label>
+                <input type="radio" id="annuity" name="calcType" value="annuity" checked />
+                <label for="differentiated">Differentiated:</label>
+                <input type="radio" id="differentiated" name="calcType" value="differentiated" />
+            </div>
+            <button type="button" onclick="calculateCredit()" class="btn-calc">Calculate</button>
+        </form>
+        <div class="output">
+            <div class="result-field">
+                <label for="monthlyPayment">Monthly Payment:</label>
+                <input type="text" id="monthlyPayment" disabled />
+            </div>
+            <div class="result-field">
+                <label for="totalInterest">Total Interest:</label>
+                <input type="text" id="totalInterest" disabled />
+            </div>
+            <div class="result-field">
+                <label for="totalPayment">Total Payment:</label>
+                <input type="text" id="totalPayment" disabled />
             </div>
         </div>
-        <div id="historySidebar" class="sidebar">
-            <h3>History:</h3>
-            <ul id="historyList"></ul>
-            <button onclick="clearHistory()">Clear History</button>
-        </div>
-        </div>
-        <script src="scripts/calculator.js"></script>
-        <script src="scripts/menu.js"></script>
-        <script src="scripts/graphics.js"></script>
-        <script src="scripts/credit.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@1.1.1/dist/chartjs-plugin-zoom.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
-    </body>
+    </div>
+    <div id="infoCalculator" class="calculator">
+        <section class="calc">
+            <h2 class="label_calc">Main Calculator</h2>
+            <h3>
+                Smart calculator - divided into three blocks. This calculator - calculates arithmetic and binary operations with numbers, graph builder - builds a graph according to a given expression, credit calculator - has two
+                types of credit: annuity, differentiated.
+            </h3>
+            <h3 class="o">HOW TO USE:</h3>
+            <h3>
+                All buttons of the screen are active.The calculation of the expression you entered is done by pressing the "=" button.When you enter x and press =, a dialog box will appear and ask you to drive the number to replace
+                x.
+            </h3>
+            <div class="tab">
+                <table class="operators">
+                    <tr>
+                        <th>Operations</th>
+                    </tr>
+                    <tr>
+                        <th>Operator name</th>
+                        <th>Operator</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <th>bracket</th>
+                        <th>( )</th>
+                        <th>takes the expression in brackets</th>
+                        <th>x - (y * z)</th>
+                    </tr>
+                    <tr>
+                        <th>plus</th>
+                        <th>+</th>
+                        <th>addition of two operands</th>
+                        <th>x + y</th>
+                    </tr>
+                    <tr>
+                        <th>minus</th>
+                        <th>-</th>
+                        <th>the difference of two operands</th>
+                        <th>x - y</th>
+                    </tr>
+                    <tr>
+                        <th>multiplication</th>
+                        <th>*</th>
+                        <th>product of two operands</th>
+                        <th>x * y</th>
+                    </tr>
+                    <tr>
+                        <th>division</th>
+                        <th>/</th>
+                        <th>division of two operands</th>
+                        <th>x / y</th>
+                    </tr>
+                    <tr>
+                        <th>exponentiation</th>
+                        <th>^</th>
+                        <th>exponentiation</th>
+                        <th>x ^ y</th>
+                    </tr>
+                    <tr>
+                        <th>remainder of division</th>
+                        <th>mod</th>
+                        <th>remainder of division</th>
+                        <th>x mod y</th>
+                    </tr>
+                    <tr>
+                        <th>unary minus</th>
+                        <th>-</th>
+                        <th>unary minus</th>
+                        <th>-x</th>
+                    </tr>
+                    <tr>
+                        <th>unary plus</th>
+                        <th>+</th>
+                        <th>unaru plus</th>
+                        <th>+a</th>
+                    </tr>
+                </table>
+                <table class="func">
+                    <tr>
+                        <th>Functions</th>
+                    </tr>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description function</th>
+                    </tr>
+                    <tr>
+                        <th>cos(x)</th>
+                        <th>Computes cosine</th>
+                    </tr>
+                    <tr>
+                        <th>sin(x)</th>
+                        <th>Computes sine</th>
+                    </tr>
+                    <tr>
+                        <th>tan(x)</th>
+                        <th>Computes tangent</th>
+                    </tr>
+                    <tr>
+                        <th>acos(x)</th>
+                        <th>Computes arc cosine</th>
+                    </tr>
+                    <tr>
+                        <th>asin(x)</th>
+                        <th>Computes arc sine</th>
+                    </tr>
+                    <tr>
+                        <th>atan(x)</th>
+                        <th>Computes arc tangent</th>
+                    </tr>
+
+                    <tr>
+                        <th>sqrt(x)</th>
+                        <th>Computes square root</th>
+                    </tr>
+                    <tr>
+                        <th>ln(x)</th>
+                        <th>Computes natural logarithm</th>
+                    </tr>
+                    <tr>
+                        <th>log(x)</th>
+                        <th>Computes common logarithm</th>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <section class="graph">
+            <h2>Graph builder</h2>
+            <h3>Graph builders - plots the graph according to the output expression. The range is from - 1,000,000 to 1,000,000 inclusive.</h3>
+            <h3 class="o">HOW TO USE:</h3>
+            <h3>
+                Entering x(min) and x(max) will set the range of the graph on the x-axis, entering <b>X</b> will set a point on the X-axis, entering <b>Y</b> will set a point on the Y-axis.Clicking on <b>custom</b> will clear your
+                fields, clicking on <b>example</b> will set an example for a quick test of the Graph Builder utility
+            </h3>
+        </section>
+        <section class="credit">
+            <h2>Credit Calculator</h2>
+            <h3>Loan Calculator - calculates your loan. It has two types of credit: annuity, differentiated.</h3>
+            <h3 class="o">HOW TO USE:</h3>
+            <h3>
+                At the entrance there are three parameters: the loan amount, term for which the loan is taken (in months), the interest rate, in accordance with these parameters and depending on the type of credit you selected, your
+                repayment plan will be calculated.
+            </h3>
+        </section>
+        <section class="deposit">
+            <h2>Deposit Calculator</h2>
+            <h3>
+                deposit calculator - suitable for calculating deposits for a certain period, the functionality allows you to add and subtract from the principal amount, there is interest capitalization.
+            </h3>
+            <h3 class="o">HOW TO USE:</h3>
+            <h3>
+                Enter all the input data and click the calculate button.
+            </h3>
+        </section>
+    </div>
+    <div id="graphicsCalculator" class="calculator">
+        <h2>Build Graphics</h2>
+        <form id="graphForm">
+            <label for="graphExpression">Enter the expression:</label>
+            <input type="text" id="graphExpression" required />
+            <label for="xStart">X Start:</label>
+            <input type="number" id="xStart" required />
+            <label for="xEnd">X End:</label>
+            <input type="number" id="xEnd" required />
+            <label for="step">Step:</label>
+            <input type="number" id="step" required />
+            <button type="button" onclick="plotGraph()">Plot Graph</button>
+        </form>
+        <canvas id="graphContainer" width="800" height="400"></canvas>
+    </div>
+</div>
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <label for="x">Enter the value of x:</label>
+        <input type="number" id="xInput" name="x" required />
+        <button onclick="setXValue()">Calculate</button>
+    </div>
+</div>
+<div id="historySidebar" class="sidebar">
+    <h3>History:</h3>
+    <ul id="historyList"></ul>
+    <button onclick="clearHistory()">Clear History</button>
+</div>
+<script src="scripts/calculator.js"></script>
+<script src="scripts/menu.js"></script>
+<script src="scripts/graphics.js"></script>
+<script src="scripts/credit.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@1.1.1/dist/chartjs-plugin-zoom.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+</body>
 </html>
