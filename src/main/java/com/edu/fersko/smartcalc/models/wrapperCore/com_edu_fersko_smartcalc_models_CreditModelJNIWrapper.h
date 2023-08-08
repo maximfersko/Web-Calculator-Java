@@ -18,7 +18,7 @@ JNIEXPORT void JNICALL Java_com_edu_fersko_smartcalc_models_CreditModelJNIWrappe
 
 /*
  * Class:     com_edu_fersko_smartcalc_models_CreditModelJNIWrapper
- * Method:    deffirentatedNative
+ * Method:    deffirentated
  * Signature: (DDD)V
  */
 JNIEXPORT void JNICALL Java_com_edu_fersko_smartcalc_models_CreditModelJNIWrapper_deffirentated
@@ -26,7 +26,7 @@ JNIEXPORT void JNICALL Java_com_edu_fersko_smartcalc_models_CreditModelJNIWrappe
 
 /*
  * Class:     com_edu_fersko_smartcalc_models_CreditModelJNIWrapper
- * Method:    getResultNative
+ * Method:    getResult
  * Signature: ()Lcom/edu/fersko/smartcalc/models/CreditData;
  */
 JNIEXPORT jobject JNICALL Java_com_edu_fersko_smartcalc_models_CreditModelJNIWrapper_getResult
