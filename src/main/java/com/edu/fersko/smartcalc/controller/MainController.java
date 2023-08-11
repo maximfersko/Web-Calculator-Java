@@ -86,7 +86,7 @@ public class MainController {
         double xEnd = Double.parseDouble(requestBody.get("xEnd"));
         double step = Double.parseDouble(requestBody.get("step"));
 
-        List < Point > points = coreSmartCalc.graphBuilder(null, expression);
+        List < Point > points = coreSmartCalc.graphBuilder(new double[]{xStart, xEnd, step}, expression);
 
         return ResponseEntity.ok(points);
     }

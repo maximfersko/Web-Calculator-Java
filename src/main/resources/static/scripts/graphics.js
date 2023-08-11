@@ -1,33 +1,38 @@
-// scripts/graphics-logic.js
 function plotGraph() {
-    const expression = document.getElementById("graphExpression")
-        .value;
-    const xStart = parseFloat(document.getElementById("xStart")
-    .value);
+    const expression = document.getElementById("graphExpression").value;
+    const xStart = parseFloat(document.getElementById("xStart").value);
     const xEnd = parseFloat(document.getElementById("xEnd").value);
-    const step = parseFloat(document.getElementById("step").value);
+    const stepInput = document.getElementById("step");
+    const step = parseFloat(stepInput.value);
+
+    if (isNaN(step)) {
+        alert("Please enter a valid numeric value for Step.");
+        stepInput.focus();
+        return;
+    }
 
     fetch("/calculateGraph", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                expression: expression,
-                xStart: xStart,
-                xEnd: xEnd,
-                step: step,
-            }),
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            const xValues = data.map((point) => point.x);
-            const yValues = data.map((point) => point.y);
-            plotGraphUsingChartJs(xValues, yValues, document
-                .getElementById("graphContainer"));
-        })
-        .catch((error) => console.error("Error:", error));
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            expression: expression,
+            xStart: xStart,
+            xEnd: xEnd,
+            step: step,
+        }),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        const xValues = data.map((point) => point.x);
+        const yValues = data.map((point) => point.y);
+        plotGraphUsingChartJs(xValues, yValues, document.getElementById("graphContainer"));
+    })
+    .catch((error) => console.error("Error:", error));
 }
+
+
 
 function plotGraphUsingChartJs(xValues, yValues, graphContainer) {
     const ctx = graphContainer.getContext("2d");
@@ -44,7 +49,7 @@ function plotGraphUsingChartJs(xValues, yValues, graphContainer) {
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',
                 tension: 0.1
-            }, ],
+            }],
         },
         options: {
             responsive: true,
