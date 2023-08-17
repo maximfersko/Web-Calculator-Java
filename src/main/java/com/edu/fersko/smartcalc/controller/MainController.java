@@ -43,27 +43,29 @@ public class MainController {
     @ResponseBody
     public List < String > getHistory() {
         return service.getHistory();
-    }    
+    }
 
     @PostMapping("/calculate")
-    public ResponseEntity < ResultResponse > calculate(@RequestBody Map < String, String > requestBody) {
+    public ResponseEntity<ResultResponse> calculate(@RequestBody Map<String, String> requestBody) {
         String expression = requestBody.get("expression");
         double result;
 
         try {
             result = coreSmartCalc.getResult(expression, 0);
+
+            String calculation = expression + " = " + result;
+            service.getHistory().add(calculation);
+            service.writeHistoryToFile();
+
+            ResultResponse resultResponse = new ResultResponse("Success");
+            resultResponse.setResult(result);
+
+            return ResponseEntity.ok(resultResponse);
         } catch (NativeCalculationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResultResponse("Error during calculation"));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResultResponse("Internal server error"));
         }
-
-        String calculation = expression + " = " + result;
-        service.getHistory().add(calculation);
-        service.writeHistoryToFile();
-
-        ResultResponse resultResponse = new ResultResponse("Error during calculation");
-        resultResponse.setResult(result);
-
-        return ResponseEntity.ok(resultResponse);
     }
 
     @PostMapping("/clearHistory")
@@ -82,27 +84,16 @@ public class MainController {
 
     @PostMapping("/calculateGraph")
     @ResponseBody
-    public ResponseEntity<Map<String, List<Double>>> calculateGraph(@RequestBody @NotNull Map<String, Object> requestBody) {
+    public ResponseEntity<GraphData> calculateGraph(@RequestBody @NotNull Map<String, Object> requestBody) {
         String expression = (String) requestBody.get("expression");
+        double xStart = ((Number) requestBody.get("xStart")).doubleValue();
+        double xEnd = ((Number) requestBody.get("xEnd")).doubleValue();
 
-        List<Double> data = new ArrayList<>();
+        double[] data = {xStart, xEnd, 0.0};
 
-        for (Object item : (List<?>) requestBody.get("data")) {
-            if (item instanceof Integer) {
-                data.add(((Integer) item).doubleValue());
-            } else if (item instanceof Double) {
-                data.add((Double) item);
-            }
-        }
+        GraphData graphData = coreSmartCalc.graphBuilder(data, expression);
 
-        double[] dataArray = data.stream().mapToDouble(Double::doubleValue).toArray();
-        List<Point> points = coreSmartCalc.graphBuilder(dataArray, expression);
-
-        Map<String, List<Double>> result = new HashMap<>();
-        result.put("xValues", points.stream().map(Point::getX).collect(Collectors.toList()));
-        result.put("yValues", points.stream().map(Point::getY).collect(Collectors.toList()));
-
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(graphData);
     }
 
 

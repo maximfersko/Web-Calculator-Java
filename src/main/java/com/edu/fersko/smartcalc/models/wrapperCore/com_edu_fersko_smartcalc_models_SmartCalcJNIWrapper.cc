@@ -42,29 +42,49 @@ JNIEXPORT void JNICALL Java_com_edu_fersko_smartcalc_models_SmartCalcJNIWrapper_
  * Signature: ([DLjava/lang/String;)Ljava/util/List;
  */
 JNIEXPORT jobject JNICALL Java_com_edu_fersko_smartcalc_models_SmartCalcJNIWrapper_graphBuilder
-    (JNIEnv * env, jobject obj, jdoubleArray jData, jstring jstr) {
+    (JNIEnv *env, jobject obj, jdoubleArray jData, jstring jstr) {
+    jsize length = env->GetArrayLength(jData);
+    jdouble *data = env->GetDoubleArrayElements(jData, nullptr);
+    std::vector<double> Data(data, data + length);
+    env->ReleaseDoubleArrayElements(jData, data, JNI_ABORT);
 
-        jsize length = env -> GetArrayLength(jData);
-        jdouble * data = env -> GetDoubleArrayElements(jData, nullptr);
-        std::vector < double > Data(data, data + length);
-        env -> ReleaseDoubleArrayElements(jData, data, JNI_ABORT);
+    const char *str = env->GetStringUTFChars(jstr, nullptr);
+    std::string cppStr(str);
+    env->ReleaseStringUTFChars(jstr, str);
 
-        const char * str = env -> GetStringUTFChars(jstr, nullptr);
-        std::string cppStr(str);
-        env -> ReleaseStringUTFChars(jstr, str);
+    std::vector<double> xValues;
+    std::vector<double> yValues;
 
-        std::pair < std::vector < double > , std::vector < double >> graphPoints = smartCalcInstance.graphBuilder(Data, cppStr);
+    std::pair<std::vector<double>, std::vector<double>> graphPoints = smartCalcInstance.graphBuilder(Data, cppStr);
+    xValues = graphPoints.first;
+    yValues = graphPoints.second;
 
-        int pointsSize = graphPoints.first.size();
-        jdoubleArray jX = env -> NewDoubleArray(pointsSize);
-        jdoubleArray jY = env -> NewDoubleArray(pointsSize);
-        env -> SetDoubleArrayRegion(jX, 0, pointsSize, graphPoints.first.data());
-        env -> SetDoubleArrayRegion(jY, 0, pointsSize, graphPoints.second.data());
+    jclass arrayListClass = env->FindClass("java/util/ArrayList");
+    jmethodID arrayListCtor = env->GetMethodID(arrayListClass, "<init>", "()V");
+    jmethodID arrayListAdd = env->GetMethodID(arrayListClass, "add", "(Ljava/lang/Object;)Z");
+    jclass DoubleClass = env->FindClass("java/lang/Double");
+    jmethodID DoubleCtor = env->GetMethodID(DoubleClass, "<init>", "(D)V");
 
-        jobjectArray resultArray = env -> NewObjectArray(2, env -> GetObjectClass(jX), nullptr);
-        env -> SetObjectArrayElement(resultArray, 0, jX);
-        env -> SetObjectArrayElement(resultArray, 1, jY);
+    jobject xList = env->NewObject(arrayListClass, arrayListCtor);
+    jobject yList = env->NewObject(arrayListClass, arrayListCtor);
 
-        return resultArray;
-
+    for (double value : xValues) {
+        env->CallBooleanMethod(xList, arrayListAdd, env->NewObject(DoubleClass, DoubleCtor, value));
     }
+
+    for (double value : yValues) {
+        env->CallBooleanMethod(yList, arrayListAdd, env->NewObject(DoubleClass, DoubleCtor, value));
+    }
+
+    jclass graphDataClass = env->FindClass("com/edu/fersko/smartcalc/models/GraphData");
+    jmethodID graphDataCtor = env->GetMethodID(graphDataClass, "<init>", "(Ljava/util/List;Ljava/util/List;)V");
+    jobject graphData = env->NewObject(graphDataClass, graphDataCtor, xList, yList);
+
+    jmethodID toStringMethod = env->GetMethodID(graphDataClass, "toString", "()Ljava/lang/String;");
+    jstring graphDataString = (jstring) env->CallObjectMethod(graphData, toStringMethod);
+    const char *graphDataStr = env->GetStringUTFChars(graphDataString, nullptr);
+    printf("GraphData: %s\n", graphDataStr);
+    env->ReleaseStringUTFChars(graphDataString, graphDataStr);
+
+    return graphData;
+}
