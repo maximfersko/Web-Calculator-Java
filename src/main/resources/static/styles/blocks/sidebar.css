@@ -1,21 +1,59 @@
 .sidebar {
-     position: fixed;
-     top: 20px;
-     right: -500px;
-     width: 320px;
-     min-height: 100px;
-     max-height: 100%;
-     background-color: #bbb8b8;
-     padding: 20px;
-     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-     font-family: 'Courier New', Courier, monospace;
-     font-size: medium;
-     transition: right 0.3s ease;
-     overflow-y: auto;
-     border-radius: 8px;
-     align-items: center;
-     justify-content: center;
+    position: fixed;
+    top: 20px;
+    right: -500px;
+    width: 320px;
+    min-height: 100px;
+    max-height: 100%;
+    background-color: #bbb8b8;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
 }
- .sidebar.open {
-     right: 20px;
+
+.sidebar.open {
+    right: 20px;
+}
+
+#historyList {
+    list-style-type: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+#historyList li {
+    position: relative;
+    padding: 5px 0;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: background-color 0.3s ease;
+}
+
+#historyList li.active,
+#historyList li:hover {
+    background-color: #d3d3d3;
+}
+
+#historyList li::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -20px;
+    width: 20px;
+    height: 100%;
+    background: linear-gradient(to right, transparent, #d3d3d3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+#historyList li:hover::before,
+#historyList li.active::before {
+    opacity: 1;
 }

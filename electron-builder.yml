@@ -4,7 +4,5 @@ directories:
   output: dist
 win:
   target: nsis
-  icon: build/icon.ico
 mac:
   target: pkg
-  icon: build/icon.icns

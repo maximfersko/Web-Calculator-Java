@@ -1,5 +1,3 @@
-let shareBtn = document.getElementById("shareBtn");
-
 shareBtn.addEventListener("click", () => {
     shareBtn.classList.toggle("open");
 });
@@ -33,22 +31,6 @@ function calculateWithX() {
     } else {
         evaluateExpression();
     }
-}
-
-function clearHistory() {
-    const historyList = document.getElementById("historyList");
-    historyList.innerHTML = "";
-
-    fetch('/clearHistory', {
-            method: 'POST',
-        })
-        .then((response) => response.text())
-        .then((data) => {
-            console.log(data);
-        })
-        .catch((error) => {
-            console.error('Error clearing history:', error);
-        });
 }
 
 
@@ -102,51 +84,4 @@ function evaluateExpression() {
         .catch((error) => {
             expressionLabel.innerText = 'Error';
         });
-}
-
-
-
-
-function showModal() {
-    let modal = document.getElementById("modal");
-    modal.style.display = "block";
-}
-
-function closeModal() {
-    let modal = document.getElementById("modal");
-    modal.style.display = "none";
-}
-
-function clearInput() {
-    document.getElementById('expressionLabel').innerText = "";
-    document.getElementById('resultLabel').innerText = "";
-}
-
-
-function fetchHistory() {
-    fetch('/history')
-        .then((response) => response.json())
-        .then((data) => {
-            const historyList = document.getElementById(
-                "historyList");
-            historyList.innerHTML = "";
-            data.forEach((item) => {
-                const historyItem = document
-                    .createElement("li");
-                historyItem.textContent = item;
-                historyList.appendChild(historyItem);
-            });
-        })
-        .catch((error) => {
-            console.error("Error fetching history:", error);
-        });
-}
-
-
-function toggleHistory() {
-    let historySidebar = document.getElementById("historySidebar");
-    historySidebar.classList.toggle("open");
-    if (historySidebar.classList.contains("open")) {
-        fetchHistory();
-    }
 }
