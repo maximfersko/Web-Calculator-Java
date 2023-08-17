@@ -41,7 +41,7 @@ public class MainController {
     @ResponseBody
     public List < String > getHistory() {
         return service.getHistory();
-    }
+    }    
 
     @PostMapping("/calculate")
     public ResponseEntity < ResultResponse > calculate(@RequestBody Map < String, String > requestBody) {
