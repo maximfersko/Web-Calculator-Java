@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.edu.fersko.smartcalc.services.CalculatorUtilitiesService;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
@@ -80,16 +82,29 @@ public class MainController {
 
     @PostMapping("/calculateGraph")
     @ResponseBody
-    public ResponseEntity < List < Point >> calculateGraph(@RequestBody @NotNull Map < String, String > requestBody) {
-        String expression = requestBody.get("expression");
-        double xStart = Double.parseDouble(requestBody.get("xStart"));
-        double xEnd = Double.parseDouble(requestBody.get("xEnd"));
-        double step = Double.parseDouble(requestBody.get("step"));
+    public ResponseEntity<Map<String, List<Double>>> calculateGraph(@RequestBody @NotNull Map<String, Object> requestBody) {
+        String expression = (String) requestBody.get("expression");
 
-        List < Point > points = coreSmartCalc.graphBuilder(new double[]{xStart, xEnd, step}, expression);
+        List<Double> data = new ArrayList<>();
 
-        return ResponseEntity.ok(points);
+        for (Object item : (List<?>) requestBody.get("data")) {
+            if (item instanceof Integer) {
+                data.add(((Integer) item).doubleValue());
+            } else if (item instanceof Double) {
+                data.add((Double) item);
+            }
+        }
+
+        double[] dataArray = data.stream().mapToDouble(Double::doubleValue).toArray();
+        List<Point> points = coreSmartCalc.graphBuilder(dataArray, expression);
+
+        Map<String, List<Double>> result = new HashMap<>();
+        result.put("xValues", points.stream().map(Point::getX).collect(Collectors.toList()));
+        result.put("yValues", points.stream().map(Point::getY).collect(Collectors.toList()));
+
+        return ResponseEntity.ok(result);
     }
+
 
     @PostMapping("/calculateCredit")
     @ResponseBody
