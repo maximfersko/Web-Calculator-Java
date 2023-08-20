@@ -89,7 +89,7 @@ public class MainController {
         double xStart = ((Number) requestBody.get("xStart")).doubleValue();
         double xEnd = ((Number) requestBody.get("xEnd")).doubleValue();
 
-        double[] data = {xStart, xEnd, 0.0};
+        double[] data = {xStart, xEnd};
 
         GraphData graphData = coreSmartCalc.graphBuilder(data, expression);
 
