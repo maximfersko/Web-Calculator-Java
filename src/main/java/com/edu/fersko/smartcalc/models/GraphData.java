@@ -18,4 +18,10 @@ public class GraphData {
     public List<Double> getyValues() {
         return yValues;
     }
+
+    @Override
+    public String toString() {
+        return "GraphData{xValues=" + xValues + ", yValues=" + yValues + "}";
+    }
+
 }
