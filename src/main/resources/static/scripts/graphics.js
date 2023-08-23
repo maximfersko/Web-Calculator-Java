@@ -1,4 +1,12 @@
+const plotButton = document.getElementById("plotButton");
+const graphContainer = document.getElementById("graphContainer");
+let chartInstance = null;
+
 plotButton.addEventListener("click", async function () {
+    if (chartInstance) {
+        chartInstance.destroy();
+    }
+
     const expression = document.getElementById("graphExpression").value;
     const xStart = parseFloat(document.getElementById("xStart").value);
     const xEnd = parseFloat(document.getElementById("xEnd").value);
@@ -51,11 +59,28 @@ plotButton.addEventListener("click", async function () {
                     y: {
                         beginAtZero: true
                     }
+                },
+                plugins: {
+                    zoom: {
+                        pan: {
+                            enabled: true,
+                            mode: "xy"
+                        },
+                        zoom: {
+                            wheel: {
+                                enabled: true,
+                            },
+                            pinch: {
+                                enabled: true
+                            },
+                            mode: "xy"
+                        }
+                    }
                 }
             }
         };
 
-        new Chart(ctx, graphConfig);
+        chartInstance = new Chart(ctx, graphConfig);
     } catch (error) {
         console.error("Error:", error);
     }
