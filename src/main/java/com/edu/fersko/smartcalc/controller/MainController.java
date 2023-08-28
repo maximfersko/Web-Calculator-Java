@@ -89,12 +89,17 @@ public class MainController {
         double xStart = ((Number) requestBody.get("xStart")).doubleValue();
         double xEnd = ((Number) requestBody.get("xEnd")).doubleValue();
 
+        System.out.println("Received expression: " + expression);
+        System.out.println("Received xStart: " + xStart);
+        System.out.println("Received xEnd: " + xEnd);
+
         double[] data = {xStart, xEnd};
 
         GraphData graphData = coreSmartCalc.graphBuilder(data, expression);
 
         return ResponseEntity.ok(graphData);
     }
+
 
 
     @PostMapping("/calculateCredit")

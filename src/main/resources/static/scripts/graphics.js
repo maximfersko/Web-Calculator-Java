@@ -1,7 +1,4 @@
-const plotButton = document.getElementById("plotButton");
-const graphContainer = document.getElementById("graphContainer");
 let chartInstance = null;
-
 plotButton.addEventListener("click", async function () {
     if (chartInstance) {
         chartInstance.destroy();
@@ -18,21 +15,23 @@ plotButton.addEventListener("click", async function () {
     };
 
     try {
-        const response = await fetch("/calculateGraph", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(requestData)
-        });
+        console.log("Before fetch");
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+            const response = await fetch("/calculateGraph", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(requestData)
+            });
+
+            console.log("After fetch");
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
 
         const data = await response.json();
-
-        console.log("Received data:", data);
 
         const xValues = data.xValues;
         const yValues = data.yValues;
@@ -81,6 +80,7 @@ plotButton.addEventListener("click", async function () {
         };
 
         chartInstance = new Chart(ctx, graphConfig);
+        chartInstance.update();
     } catch (error) {
         console.error("Error:", error);
     }
