@@ -1,5 +1,5 @@
 appId: com.edu.fersko.smartcalc.Application
-productName: Smart Calculator
+productName: Smart-Calculator
 directories:
   output: dist
 win:
