@@ -12,7 +12,7 @@ function handleButtonClick(value) {
     if (value === 'x') {
         expressionLabel.innerText += value;
     } else if (value.length === 1 && /^[a-zA-Z]+$/.test(value) &&
-        currentExpression.indexOf('x') === -1) {
+        currentExpression.indexOf('x') === -1 && !currentExpression.indexOf('p')) {
         expressionLabel.innerText += value + '(';
     } else if (currentExpression.includes("Error")) {
         clearInput();
