@@ -24,20 +24,19 @@
                 <div id="expressionLabel" class="input-output" th:text="${result}"></div>
             </div>
             <div class="buttons">
-                <button type="button" onclick="handleButtonClick('0')">0</button>
                 <button type="button" onclick="handleButtonClick('1')">1</button>
                 <button type="button" onclick="handleButtonClick('2')">2</button>
                 <button type="button" onclick="handleButtonClick('3')">3</button>
                 <button type="button" onclick="clearInput()">AC</button>
-                <button type="button" onclick="handleButtonClick('p')">p</button>
                 <button type="button" onclick="handleButtonClick('4')">4</button>
                 <button type="button" onclick="handleButtonClick('5')">5</button>
                 <button type="button" onclick="handleButtonClick('6')">6</button>
+                <button type="button" onclick="handleButtonClick('-')">-</button>
                 <button type="button" onclick="handleButtonClick('7')">7</button>
                 <button type="button" onclick="handleButtonClick('8')">8</button>
                 <button type="button" onclick="handleButtonClick('9')">9</button>
                 <button type="button" onclick="handleButtonClick('+')">+</button>
-                <button type="button" onclick="handleButtonClick('-')">-</button>
+                <button type="button" onclick="handleButtonClick('0')">0</button>
                 <button type="button" onclick="handleButtonClick('*')">*</button>
                 <button type="button" onclick="handleButtonClick('/')">/</button>
                 <button type="button" onclick="handleButtonClick('^')">^</button>
@@ -52,11 +51,11 @@
                 <button type="button" onclick="handleButtonClick('(')">(</button>
                 <button type="button" onclick="handleButtonClick(')')">)</button>
                 <button type="button" onclick="handleButtonClick('%')">%</button>
-                <button type="button" onclick="handleButtonClick('.')">.</button>
                 <button type="button" onclick="handleButtonClick('sqrt')">sqrt</button>
+                <button type="button" onclick="handleButtonClick('.')">.</button>
                 <button type="button" onclick="handleButtonClick('x')">x</button>
-                <button type="button" class="btn-calc" onclick="calculateWithX()">=</button>
                 <button type="button" onclick="toggleHistory()">History</button>
+                <button type="button" class="btn-calc" onclick="calculateWithX()">=</button>
             </div>
         </form>
     </div>
@@ -241,16 +240,6 @@
                 repayment plan will be calculated.
             </h3>
         </section>
-        <section class="deposit">
-            <h2>Deposit Calculator</h2>
-            <h3>
-                deposit calculator - suitable for calculating deposits for a certain period, the functionality allows you to add and subtract from the principal amount, there is interest capitalization.
-            </h3>
-            <h3 class="o">HOW TO USE:</h3>
-            <h3>
-                Enter all the input data and click the calculate button.
-            </h3>
-        </section>
     </div>
     <div id="graphicsCalculator" class="calculator">
         <h2>Build Graphics</h2>
@@ -263,7 +252,7 @@
             <input type="number" id="xEnd" required />
             <button type="button" id="plotButton">Plot Graph</button>
         </form>
-        <canvas id="graphContainer" width="800" height="400"></canvas>
+        <canvas id="graphContainer" width="800" height="500"></canvas>
     </div>
     
 </div>
