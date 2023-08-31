@@ -1,17 +1,23 @@
 .calculator-container {
-     display: flex;
-     flex-direction: column;
-     align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
- .calculator-wrapper {
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-     position: relative;
-     height: 100vh;
-     overflow: hidden;
+
+.calculator-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+     overflow: auto;
 }
+
  .expression-field {
      margin: 10px auto;
      height: 50px;
