@@ -1,5 +1,7 @@
 #graphicsCalculator {
+width: 100%; /* Ширина холста занимает всю доступную ширину контейнера */
+    height: 100%;
     display: none;
-    width: 800px;
-    height: 400px;
+    width: 1000px;
+    height: 600px;
 }
