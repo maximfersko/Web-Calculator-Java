@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.edu.fersko.smartcalc.services.CalculatorUtilitiesService;
 
@@ -80,24 +77,26 @@ public class MainController {
         return ResponseEntity.ok("History cleared.");
     }
 
-    @PostMapping("/calculateGraph")
-    @ResponseBody
-    public ResponseEntity<GraphData> calculateGraph(@RequestBody @NotNull Map<String, Object> requestBody) {
-        String expression = (String) requestBody.get("expression");
-        double xStart = ((Number) requestBody.get("xStart")).doubleValue();
-        double xEnd = ((Number) requestBody.get("xEnd")).doubleValue();
+    public ResponseEntity<GraphData> calculateGraph(
+            @RequestParam String expression,
+            @RequestParam double xStart,
+            @RequestParam double xEnd)  {
+        try {
 
-        System.out.println("Received expression: " + expression);
-        System.out.println("Received xStart: " + xStart);
-        System.out.println("Received xEnd: " + xEnd);
+            System.out.println("Received expression: " + expression);
+            System.out.println("Received xStart: " + xStart);
+            System.out.println("Received xEnd: " + xEnd);
 
-        double[] data = {xStart, xEnd};
+            double[] data = {xStart, xEnd};
 
-        GraphData graphData = coreSmartCalc.graphBuilder(data, expression);
+            GraphData graphData = coreSmartCalc.graphBuilder(data, expression);
 
-        return ResponseEntity.ok(graphData);
+            return ResponseEntity.ok(graphData);
+        } catch (Exception e) {
+            System.err.println("Error while processing request: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
-
 
 
     @PostMapping("/calculateCredit")
