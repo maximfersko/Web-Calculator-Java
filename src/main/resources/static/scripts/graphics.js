@@ -1,4 +1,5 @@
 let chartInstance = null;
+
 plotButton.addEventListener("click", async function () {
     if (chartInstance) {
         chartInstance.destroy();
@@ -8,28 +9,23 @@ plotButton.addEventListener("click", async function () {
     const xStart = parseFloat(document.getElementById("xStart").value);
     const xEnd = parseFloat(document.getElementById("xEnd").value);
 
-    const requestData = {
-        expression: expression,
-        xStart: xStart,
-        xEnd: xEnd
-    };
+    const url = `/calculateGraph?expression=${expression}&xStart=${xStart}&xEnd=${xEnd}`;
 
     try {
         console.log("Before fetch");
 
-            const response = await fetch("/calculateGraph", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(requestData)
-            });
-
-            console.log("After fetch");
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
             }
+        });
+
+        console.log("After fetch");
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
         const data = await response.json();
 
