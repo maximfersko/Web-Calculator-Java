@@ -15,14 +15,27 @@ static model::SmartCalc smartCalcInstance;
 JNIEXPORT jdouble JNICALL Java_com_edu_fersko_smartcalc_models_SmartCalcJNIWrapper_getResult
     (JNIEnv * env, jobject obj, jstring jstr, jdouble jx) {
 
-        const char * str = env -> GetStringUTFChars(jstr, nullptr);
+    try {
+        const char * str = env->GetStringUTFChars(jstr, nullptr);
         std::string cppStr(str);
-        env -> ReleaseStringUTFChars(jstr, str);
+        env->ReleaseStringUTFChars(jstr, str);
 
         double result = smartCalcInstance.RPN(cppStr, static_cast < model::SmartCalc::data > (jx));
         return static_cast < jdouble > (result);
-
+    } catch (const std::exception& e) {
+        jclass calculationExceptionClass = env->FindClass("com/edu/fersko/smartcalc/exceptions/CalculationException");
+        if (calculationExceptionClass != nullptr) {
+            jmethodID ctor = env->GetMethodID(calculationExceptionClass, "<init>", "(Ljava/lang/String;)V");
+            if (ctor != nullptr) {
+                jstring message = env->NewStringUTF(e.what());
+                jobject exception = env->NewObject(calculationExceptionClass, ctor, message);
+                env->Throw((jthrowable)exception);
+            }
+        }
+        return 0;
     }
+}
+
 
 /*
  * Class:     com_edu_fersko_smartcalc_models_SmartCalcJNIWrapper
@@ -43,48 +56,62 @@ JNIEXPORT void JNICALL Java_com_edu_fersko_smartcalc_models_SmartCalcJNIWrapper_
  */
 JNIEXPORT jobject JNICALL Java_com_edu_fersko_smartcalc_models_SmartCalcJNIWrapper_graphBuilder
     (JNIEnv *env, jobject obj, jdoubleArray jData, jstring jstr) {
-    jsize length = env->GetArrayLength(jData);
-    jdouble *data = env->GetDoubleArrayElements(jData, nullptr);
-    std::vector<double> Data(data, data + length);
-    env->ReleaseDoubleArrayElements(jData, data, JNI_ABORT);
+    try {
+        jsize length = env->GetArrayLength(jData);
+        jdouble *data = env->GetDoubleArrayElements(jData, nullptr);
+        std::vector<double> Data(data, data + length);
+        env->ReleaseDoubleArrayElements(jData, data, JNI_ABORT);
 
-    const char *str = env->GetStringUTFChars(jstr, nullptr);
-    std::string cppStr(str);
-    env->ReleaseStringUTFChars(jstr, str);
+        const char *str = env->GetStringUTFChars(jstr, nullptr);
+        std::string cppStr(str);
+        env->ReleaseStringUTFChars(jstr, str);
 
-    std::vector<double> xValues;
-    std::vector<double> yValues;
+        std::vector<double> xValues;
+        std::vector<double> yValues;
 
-    std::pair<std::vector<double>, std::vector<double>> graphPoints = smartCalcInstance.graphBuilder(Data, cppStr);
-    xValues = graphPoints.first;
-    yValues = graphPoints.second;
+        std::pair<std::vector<double>, std::vector<double>> graphPoints = smartCalcInstance.graphBuilder(Data, cppStr);
+        xValues = graphPoints.first;
+        yValues = graphPoints.second;
 
-    jclass arrayListClass = env->FindClass("java/util/ArrayList");
-    jmethodID arrayListCtor = env->GetMethodID(arrayListClass, "<init>", "()V");
-    jmethodID arrayListAdd = env->GetMethodID(arrayListClass, "add", "(Ljava/lang/Object;)Z");
-    jclass DoubleClass = env->FindClass("java/lang/Double");
-    jmethodID DoubleCtor = env->GetMethodID(DoubleClass, "<init>", "(D)V");
+        jclass arrayListClass = env->FindClass("java/util/ArrayList");
+        jmethodID arrayListCtor = env->GetMethodID(arrayListClass, "<init>", "()V");
+        jmethodID arrayListAdd = env->GetMethodID(arrayListClass, "add", "(Ljava/lang/Object;)Z");
+        jclass DoubleClass = env->FindClass("java/lang/Double");
+        jmethodID DoubleCtor = env->GetMethodID(DoubleClass, "<init>", "(D)V");
 
-    jobject xList = env->NewObject(arrayListClass, arrayListCtor);
-    jobject yList = env->NewObject(arrayListClass, arrayListCtor);
+        jobject xList = env->NewObject(arrayListClass, arrayListCtor);
+        jobject yList = env->NewObject(arrayListClass, arrayListCtor);
 
-    for (double value : xValues) {
-        env->CallBooleanMethod(xList, arrayListAdd, env->NewObject(DoubleClass, DoubleCtor, value));
+        for (double value : xValues) {
+            env->CallBooleanMethod(xList, arrayListAdd, env->NewObject(DoubleClass, DoubleCtor, value));
+        }
+
+        for (double value : yValues) {
+            env->CallBooleanMethod(yList, arrayListAdd, env->NewObject(DoubleClass, DoubleCtor, value));
+        }
+
+        jclass graphDataClass = env->FindClass("com/edu/fersko/smartcalc/models/GraphData");
+        jmethodID graphDataCtor = env->GetMethodID(graphDataClass, "<init>", "(Ljava/util/List;Ljava/util/List;)V");
+        jobject graphData = env->NewObject(graphDataClass, graphDataCtor, xList, yList);
+
+        jmethodID toStringMethod = env->GetMethodID(graphDataClass, "toString", "()Ljava/lang/String;");
+        jstring graphDataString = (jstring) env->CallObjectMethod(graphData, toStringMethod);
+        const char *graphDataStr = env->GetStringUTFChars(graphDataString, nullptr);
+        printf("GraphData: %s\n", graphDataStr);
+        env->ReleaseStringUTFChars(graphDataString, graphDataStr);
+
+        return graphData;
+
+    } catch (const std::exception &e) {
+        jclass calculationExceptionClass = env->FindClass("com/edu/fersko/smartcalc/exceptions/CalculationException");
+        if (calculationExceptionClass != nullptr) {
+            jmethodID ctor = env->GetMethodID(calculationExceptionClass, "<init>", "(Ljava/lang/String;)V");
+            if (ctor != nullptr) {
+                jstring message = env->NewStringUTF(e.what());
+                jobject exception = env->NewObject(calculationExceptionClass, ctor, message);
+                env->Throw((jthrowable) exception);
+            }
+        }
+        return nullptr;
     }
-
-    for (double value : yValues) {
-        env->CallBooleanMethod(yList, arrayListAdd, env->NewObject(DoubleClass, DoubleCtor, value));
-    }
-
-    jclass graphDataClass = env->FindClass("com/edu/fersko/smartcalc/models/GraphData");
-    jmethodID graphDataCtor = env->GetMethodID(graphDataClass, "<init>", "(Ljava/util/List;Ljava/util/List;)V");
-    jobject graphData = env->NewObject(graphDataClass, graphDataCtor, xList, yList);
-
-    jmethodID toStringMethod = env->GetMethodID(graphDataClass, "toString", "()Ljava/lang/String;");
-    jstring graphDataString = (jstring) env->CallObjectMethod(graphData, toStringMethod);
-    const char *graphDataStr = env->GetStringUTFChars(graphDataString, nullptr);
-    printf("GraphData: %s\n", graphDataStr);
-    env->ReleaseStringUTFChars(graphDataString, graphDataStr);
-
-    return graphData;
 }
