@@ -1,11 +1,10 @@
 package com.edu.fersko.smartcalc.model;
 
-import com.edu.fersko.smartcalc.models.CreditData;
 import com.edu.fersko.smartcalc.models.CreditModelJNIWrapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import org.junit.jupiter.params.provider.CsvSource;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
