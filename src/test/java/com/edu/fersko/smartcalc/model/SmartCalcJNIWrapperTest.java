@@ -1,6 +1,5 @@
 package com.edu.fersko.smartcalc.model;
 
-import com.edu.fersko.smartcalc.models.CreditModelJNIWrapper;
 import com.edu.fersko.smartcalc.models.NativeCalculationException;
 import com.edu.fersko.smartcalc.models.SmartCalcJNIWrapper;
 import org.junit.jupiter.api.BeforeAll;

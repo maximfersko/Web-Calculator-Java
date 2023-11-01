@@ -11,7 +11,16 @@ SmartCalc::graphBuilder(std::vector<double> &Data, std::string str) {
     Data.pop_back();
     int i = Data.back();
     Data.pop_back();
-    double step = (xMax - xMin) / 1000.0;  // Изменим количество точек на 1000
+
+    double range = xMax - xMin;
+
+    const int maxPoints = 1000;
+    int numPoints = std::min(numPoints, maxPoints);
+
+    double step = range / numPoints;
+    if (range > 100) {
+        step *= (range / 100);
+    }
     for (double X = xMin; X <= xMax; X += step) {
         result.first.push_back(X);
         result.second.push_back(RPN(str, X));
