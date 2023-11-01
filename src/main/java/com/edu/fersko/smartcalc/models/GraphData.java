@@ -1,7 +1,12 @@
 package com.edu.fersko.smartcalc.models;
 
+import lombok.Getter;
+import lombok.ToString;
+
 import java.util.List;
 
+@Getter
+@ToString
 public class GraphData {
     private final List<Double> xValues;
     private final List<Double> yValues;
@@ -9,19 +14,6 @@ public class GraphData {
     public GraphData(List<Double> xValues, List<Double> yValues) {
         this.xValues = xValues;
         this.yValues = yValues;
-    }
-
-    public List<Double> getxValues() {
-        return xValues;
-    }
-
-    public List<Double> getyValues() {
-        return yValues;
-    }
-
-    @Override
-    public String toString() {
-        return "GraphData{xValues=" + xValues + ", yValues=" + yValues + "}";
     }
 
 }

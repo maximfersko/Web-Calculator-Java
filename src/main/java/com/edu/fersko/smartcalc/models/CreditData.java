@@ -1,5 +1,9 @@
 package com.edu.fersko.smartcalc.models;
 
+
+import lombok.Getter;
+
+@Getter
 public class CreditData {
     private double totalPayment;
     private double monthlyPayment;
@@ -22,27 +26,4 @@ public class CreditData {
 
     }
 
-    public double getOverPayment() {
-        return overPayment;
-    }
-
-    public double getMinMonthlyPayment() {
-        return minMonthlyPayment;
-    }
-
-    public double getMaxMonthlyPayment() {
-        return maxMonthlyPayment;
-    }
-
-    public double getPayments() {
-        return payments;
-    }
-
-    public double getMonthlyPayment() {
-        return monthlyPayment;
-    }
-
-    public double getTotalPayment() {
-        return totalPayment;
-    }
 }
