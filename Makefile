@@ -39,9 +39,9 @@ SRC_WRAPPERS = $(SRC_WRAPPER_CORE)/$(WRAPPER_SMART_CALCULATOR_FILE).cc $(SRC_WRA
 
 .PHONY: clean lib
 
-default: lib
+default: all
 
-all: lib
+all: clean lib
 
 lib: $(PATH_LIB)/$(LIB_SMART_NAME).$(LIB_EXT) $(PATH_LIB)/$(LIB_CREDIT_NAME).$(LIB_EXT)
 

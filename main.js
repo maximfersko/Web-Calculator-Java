@@ -14,7 +14,7 @@ function createWindow() {
         },
     });
 
-    mainWindow.loadURL('http://localhost:8086');
+    mainWindow.loadURL('http://localhost:8088');
 
     mainWindow.on('closed', () => {
         mainWindow = null;
