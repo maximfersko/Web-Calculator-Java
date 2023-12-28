@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -20,7 +21,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 @Slf4j
 public class CalculatorController {
 	private final SmartCalcJNIWrapper coreSmartCalc;
@@ -34,7 +35,6 @@ public class CalculatorController {
 	}
 
 	@GetMapping("/history")
-	@ResponseBody
 	public List<String> getHistory() {
 		return service.getHistory();
 	}
@@ -65,7 +65,6 @@ public class CalculatorController {
 	}
 
 	@PostMapping("/clearHistory")
-	@ResponseBody
 	public ResponseEntity<String> clearHistory() {
 		service.getHistory().clear();
 

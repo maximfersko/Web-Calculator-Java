@@ -15,7 +15,7 @@ plotButton.addEventListener("click", async function () {
         console.log("Before fetch");
 
         const response = await fetch(url, {
-            method: "GET",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json"
             }
