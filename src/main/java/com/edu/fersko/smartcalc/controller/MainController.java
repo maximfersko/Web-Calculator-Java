@@ -1,32 +1,36 @@
 package com.edu.fersko.smartcalc.controller;
 
-import com.edu.fersko.smartcalc.models.*;
-import org.jetbrains.annotations.NotNull;
+import com.edu.fersko.smartcalc.exceptions.NativeCalculationException;
+import com.edu.fersko.smartcalc.models.SmartCalcJNIWrapper;
+import com.edu.fersko.smartcalc.models.dataType.ResultResponse;
+import com.edu.fersko.smartcalc.service.CalculatorUtilitiesService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.edu.fersko.smartcalc.services.CalculatorUtilitiesService;
-
-import java.io.*;
-import java.util.HashMap;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 @Controller
+@Slf4j
 public class MainController {
     private final SmartCalcJNIWrapper coreSmartCalc;
     private final CalculatorUtilitiesService service;
-    private final CreditModelJNIWrapper creditModelWrapper;
 
     @Autowired
     public MainController(SmartCalcJNIWrapper coreSmartCalc, CalculatorUtilitiesService service) {
         this.coreSmartCalc = coreSmartCalc;
         this.service = service;
         this.service.loadHistory();
-        this.creditModelWrapper = new CreditModelJNIWrapper();
     }
 
     @GetMapping("/")
@@ -35,7 +39,6 @@ public class MainController {
     }
 
     @GetMapping("/history")
-    @ResponseBody
     public List < String > getHistory() {
         return service.getHistory();
     }
@@ -60,8 +63,6 @@ public class MainController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResultResponse("Error during calculation"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResultResponse("Internal server error"));
-        } catch (Throwable t) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResultResponse("Unexpected error"));
         }
     }
 
@@ -73,58 +74,11 @@ public class MainController {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CalculatorUtilitiesService.getHistoryFilePath()))) {
             writer.write("");
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
 
         return ResponseEntity.ok("History cleared.");
     }
 
-    public ResponseEntity<GraphData> calculateGraph(
-            @RequestParam String expression,
-            @RequestParam double xStart,
-            @RequestParam double xEnd)  {
-        try {
-
-            System.out.println("Received expression: " + expression);
-            System.out.println("Received xStart: " + xStart);
-            System.out.println("Received xEnd: " + xEnd);
-
-            double[] data = {xStart, xEnd};
-
-            GraphData graphData = coreSmartCalc.graphBuilder(data, expression);
-
-            return ResponseEntity.ok(graphData);
-        } catch (Exception e) {
-            System.err.println("Error while processing request: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-    }
-
-
-    @PostMapping("/calculateCredit")
-    @ResponseBody
-    public ResponseEntity < Map < String, Double >> calculateCredit(@RequestBody Map < String, String > requestBody) {
-        double loanAmount = Double.parseDouble(requestBody.get("amour"));
-        int loanTerm = Integer.parseInt(requestBody.get("term"));
-        double interestRate = Double.parseDouble(requestBody.get("rate"));
-        String calcType = requestBody.get("calcType");
-
-        if (calcType.equals("annuity")) {
-            creditModelWrapper.annuity(loanAmount, loanTerm, interestRate);
-        } else if (calcType.equals("differentiated")) {
-            creditModelWrapper.deffirentated(loanAmount, interestRate, loanTerm);
-        }
-
-        CreditData data = creditModelWrapper.getResult();
-
-        Map < String, Double > responseData = new HashMap < > ();
-        responseData.put("monthlyPayment", data.getMonthlyPayment());
-        responseData.put("overPayment", data.getOverPayment());
-        responseData.put("totalPayment", data.getTotalPayment());
-        responseData.put("maxMonthlyPayment", data.getMaxMonthlyPayment());
-        responseData.put("minMonthlyPayment", data.getMinMonthlyPayment());
-
-        return ResponseEntity.ok(responseData);
-    }
 
 }

@@ -4,6 +4,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class NativeLibraryLoader {
+
+    private NativeLibraryLoader() {
+    }
+
     public static String getLibraryPath(boolean isMain) {
         String libraryName = isMain ? "SmartCore" : "CreditCore";
         String libraryExtension = System.getProperty("os.name").toLowerCase().contains("win") ? ".dll" : ".so";

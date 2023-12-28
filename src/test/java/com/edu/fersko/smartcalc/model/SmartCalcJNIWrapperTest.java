@@ -1,6 +1,6 @@
 package com.edu.fersko.smartcalc.model;
 
-import com.edu.fersko.smartcalc.models.NativeCalculationException;
+import com.edu.fersko.smartcalc.exceptions.NativeCalculationException;
 import com.edu.fersko.smartcalc.models.SmartCalcJNIWrapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;

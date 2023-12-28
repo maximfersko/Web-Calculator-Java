@@ -1,7 +1,13 @@
 package com.edu.fersko.smartcalc.models;
 
+import com.edu.fersko.smartcalc.models.dataType.CreditData;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
 import static com.edu.fersko.smartcalc.models.NativeLibraryLoader.getLibraryPath;
 
+@Component
+@Slf4j
 public class CreditModelJNIWrapper {
 
     static {
@@ -9,7 +15,7 @@ public class CreditModelJNIWrapper {
             String libraryPath = getLibraryPath(false);
             System.load(libraryPath);
         } catch (UnsatisfiedLinkError e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 

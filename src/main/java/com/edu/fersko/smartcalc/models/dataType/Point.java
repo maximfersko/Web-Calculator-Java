@@ -1,4 +1,4 @@
-package com.edu.fersko.smartcalc.models;
+package com.edu.fersko.smartcalc.models.dataType;
 
 import lombok.Getter;
 import lombok.Setter;

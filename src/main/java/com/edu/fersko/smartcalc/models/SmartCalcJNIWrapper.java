@@ -1,14 +1,15 @@
 package com.edu.fersko.smartcalc.models;
 
 
-
+import com.edu.fersko.smartcalc.exceptions.NativeCalculationException;
+import com.edu.fersko.smartcalc.models.dataType.GraphData;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 import static com.edu.fersko.smartcalc.models.NativeLibraryLoader.getLibraryPath;
 
 @Component
+@Slf4j
 public class SmartCalcJNIWrapper {
 
     static {
@@ -16,7 +17,7 @@ public class SmartCalcJNIWrapper {
             String libraryPath = getLibraryPath(true);
             System.load(libraryPath);
         } catch (UnsatisfiedLinkError e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 

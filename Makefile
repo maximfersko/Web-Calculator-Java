@@ -53,3 +53,7 @@ $(PATH_LIB)/$(LIB_CREDIT_NAME).$(LIB_EXT): $(SRC_CREDIT) $(SRC_WRAPPERS)
 
 clean:
 	$(RM) $(PATH_LIB)/$(LIB_SMART_NAME).$(LIB_EXT) $(PATH_LIB)/$(LIB_CREDIT_NAME).$(LIB_EXT)
+
+# for unix system
+run:
+	./mvnw spring-boot:run
