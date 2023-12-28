@@ -1,13 +1,13 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const historyList = document.getElementById(
-    "historyList");
+        "historyList");
 
-    historyList.addEventListener("click", function(event) {
+    historyList.addEventListener("click", function (event) {
         const clickedItem = event.target;
 
         if (clickedItem.tagName === "LI") {
             const expression = clickedItem
-            .textContent;
+                .textContent;
             setExpressionInput(expression);
         }
     });
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function setExpressionInput(expression) {
     const expressionInput = document.getElementById(
-    "expressionLabel");
+        "expressionLabel");
     const parts = expression.split("=");
     if (parts.length > 0) {
         expressionInput.innerText = parts[0];
@@ -55,8 +55,8 @@ function clearHistory() {
     historyList.innerHTML = "";
 
     fetch('/clearHistory', {
-            method: 'POST',
-        })
+        method: 'POST',
+    })
         .then((response) => response.text())
         .then((data) => {
             console.log(data);
@@ -72,7 +72,7 @@ function handleHistoryItemClick(event) {
     event.target.classList.add("active");
 
     const expressionLabel = document.getElementById(
-    "expressionLabel");
+        "expressionLabel");
     expressionLabel.innerText = event.target.getAttribute(
         "data-expression");
 }

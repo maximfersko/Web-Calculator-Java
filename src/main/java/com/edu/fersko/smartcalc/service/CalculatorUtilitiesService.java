@@ -17,45 +17,45 @@ import java.util.List;
 @Service
 @Slf4j
 public class CalculatorUtilitiesService {
-    private static final String HISTORY_FILE_PATH = System.getProperty("user.dir") + File.separator + "data" + File.separator + "history.txt";
+	private static final String HISTORY_FILE_PATH = System.getProperty("user.dir") + File.separator + "data" + File.separator + "history.txt";
 
-    private final List<String> history = new ArrayList<>();
+	private final List<String> history = new ArrayList<>();
 
-    public void writeHistoryToFile() {
-        try {
-            File dataFolder = new File("data");
-            if (!dataFolder.exists()) {
-                dataFolder.mkdir();
-            }
+	public static String getHistoryFilePath() {
+		return HISTORY_FILE_PATH;
+	}
 
-            File historyFile = new File(HISTORY_FILE_PATH);
-            if (!historyFile.exists()) {
-                historyFile.createNewFile();
-            }
+	public void writeHistoryToFile() {
+		try {
+			File dataFolder = new File("data");
+			if (!dataFolder.exists()) {
+				dataFolder.mkdir();
+			}
 
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(historyFile))) {
-                for (String calculation : history) {
-                    writer.write(calculation);
-                    writer.newLine();
-                }
-            }
-        } catch (IOException e) {
-	        log.error(e.getMessage());
-        }
-    }
+			File historyFile = new File(HISTORY_FILE_PATH);
+			if (!historyFile.exists()) {
+				historyFile.createNewFile();
+			}
 
-    public void loadHistory() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(HISTORY_FILE_PATH))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                history.add(line);
-            }
-        } catch (IOException e) {
-	        log.error(e.getMessage());
-        }
-    }
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter(historyFile))) {
+				for (String calculation : history) {
+					writer.write(calculation);
+					writer.newLine();
+				}
+			}
+		} catch (IOException e) {
+			log.error(e.getMessage());
+		}
+	}
 
-    public static String getHistoryFilePath() {
-        return HISTORY_FILE_PATH;
-    }
+	public void loadHistory() {
+		try (BufferedReader reader = new BufferedReader(new FileReader(HISTORY_FILE_PATH))) {
+			String line;
+			while (( line = reader.readLine() ) != null) {
+				history.add(line);
+			}
+		} catch (IOException e) {
+			log.error(e.getMessage());
+		}
+	}
 }

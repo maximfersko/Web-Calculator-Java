@@ -6,17 +6,17 @@ function calculateCredit() {
         'input[name="calcType"]:checked').value;
 
     fetch('/calculateCredit', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                amour,
-                term,
-                rate,
-                calcType
-            }),
-        })
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            amour,
+            term,
+            rate,
+            calcType
+        }),
+    })
         .then((response) => response.json())
         .then((data) => {
             if (calcType === 'annuity') {

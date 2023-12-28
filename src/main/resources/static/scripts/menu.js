@@ -19,6 +19,6 @@ function showCalculator(calculatorName) {
 
     calculatorWrapper.addEventListener('animationend', () => {
         calculatorWrapper.classList.remove(
-        'animate-slide-up');
+            'animate-slide-up');
     });
 }

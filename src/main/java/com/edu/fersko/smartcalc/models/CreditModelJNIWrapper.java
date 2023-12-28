@@ -10,16 +10,19 @@ import static com.edu.fersko.smartcalc.models.NativeLibraryLoader.getLibraryPath
 @Slf4j
 public class CreditModelJNIWrapper {
 
-    static {
-        try {
-            System.load(getLibraryPath(false));
-        } catch (UnsatisfiedLinkError e) {
-            log.error(e.getMessage());
-        }
-    }
+	static {
+		try {
+			System.load(getLibraryPath(false));
+		} catch (
+				UnsatisfiedLinkError e) {
+			log.error(e.getMessage());
+		}
+	}
 
-    public native void annuity(double summa, double period, double rate);
-    public native void deffirentated(double summa, double rate, double period);
-    public native CreditData getResult();
+	public native void annuity(double summa, double period, double rate);
+
+	public native void deffirentated(double summa, double rate, double period);
+
+	public native CreditData getResult();
 
 }

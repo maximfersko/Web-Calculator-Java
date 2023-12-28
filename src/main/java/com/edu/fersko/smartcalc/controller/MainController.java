@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 public class MainController {
 
-    @GetMapping("/")
-    public String showCalculator() {
-        return "calculator";
-    }
+	@GetMapping("/")
+	public String showCalculator() {
+		return "calculator";
+	}
 
 }

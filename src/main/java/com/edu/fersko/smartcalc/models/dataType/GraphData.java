@@ -8,6 +8,6 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 public class GraphData {
-    private final List<Double> xValues;
-    private final List<Double> yValues;
+	private final List<Double> xValues;
+	private final List<Double> yValues;
 }

@@ -12,16 +12,19 @@ import static com.edu.fersko.smartcalc.models.NativeLibraryLoader.getLibraryPath
 @Slf4j
 public class SmartCalcJNIWrapper {
 
-    static {
-        try {
-            String libraryPath = getLibraryPath(true);
-            System.load(libraryPath);
-        } catch (UnsatisfiedLinkError e) {
-            log.error(e.getMessage());
-        }
-    }
+	static {
+		try {
+			String libraryPath = getLibraryPath(true);
+			System.load(libraryPath);
+		} catch (
+				UnsatisfiedLinkError e) {
+			log.error(e.getMessage());
+		}
+	}
 
-    public native double getResult(String str, double x) throws NativeCalculationException;
-    public native void clean();
-    public native GraphData graphBuilder(double[] data, String expression);
+	public native double getResult(String str, double x) throws NativeCalculationException;
+
+	public native void clean();
+
+	public native GraphData graphBuilder(double[] data, String expression);
 }

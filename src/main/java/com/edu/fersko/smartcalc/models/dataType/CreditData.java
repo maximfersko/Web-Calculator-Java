@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreditData {
-    private double totalPayment;
-    private double monthlyPayment;
-    private double overPayment;
-    private double minMonthlyPayment;
-    private double maxMonthlyPayment;
-    private double payments;
+	private double totalPayment;
+	private double monthlyPayment;
+	private double overPayment;
+	private double minMonthlyPayment;
+	private double maxMonthlyPayment;
+	private double payments;
 }
