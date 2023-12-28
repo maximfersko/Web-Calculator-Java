@@ -41,7 +41,7 @@ JNIEXPORT jobject JNICALL Java_com_edu_fersko_smartcalc_models_CreditModelJNIWra
     try {
         model::creditData data = credit.getResult();
 
-        jclass creditDataClass = env->FindClass("com/edu/fersko/smartcalc/models/CreditData");
+        jclass creditDataClass = env->FindClass("com/edu/fersko/smartcalc/models/dataType/CreditData");
         jmethodID constructor = env->GetMethodID(creditDataClass, "<init>", "(DDDDDD)V");
         jobject result = env->NewObject(creditDataClass, constructor,
                                         data.totalPayment, data.monthlyPayment, data.overPayment,

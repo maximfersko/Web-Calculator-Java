@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +19,6 @@ public class CreditController {
 	}
 
 	@PostMapping("/calculateCredit")
-	@ResponseBody
 	public ResponseEntity<Map<String, Double>> calculateCredit(@RequestBody Map<String, String> requestBody) {
 		double loanAmount = Double.parseDouble(requestBody.get("amour"));
 		int loanTerm = Integer.parseInt(requestBody.get("term"));

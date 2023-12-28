@@ -25,9 +25,7 @@ public class GraphController {
 			@RequestParam double xEnd) {
 		try {
 			double[] data = { xStart, xEnd };
-
 			GraphData graphData = graphCore.graphBuilder(data, expression);
-
 			return ResponseEntity.ok(graphData);
 		} catch (Exception e) {
 			log.error("Error while processing request: " + e.getMessage());

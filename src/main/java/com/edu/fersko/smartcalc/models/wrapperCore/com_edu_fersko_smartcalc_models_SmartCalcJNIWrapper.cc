@@ -90,7 +90,7 @@ JNIEXPORT jobject JNICALL Java_com_edu_fersko_smartcalc_models_SmartCalcJNIWrapp
             env->CallBooleanMethod(yList, arrayListAdd, env->NewObject(DoubleClass, DoubleCtor, value));
         }
 
-        jclass graphDataClass = env->FindClass("com/edu/fersko/smartcalc/models/GraphData");
+        jclass graphDataClass = env->FindClass("com/edu/fersko/smartcalc/models/dataType/GraphData");
         jmethodID graphDataCtor = env->GetMethodID(graphDataClass, "<init>", "(Ljava/util/List;Ljava/util/List;)V");
         jobject graphData = env->NewObject(graphDataClass, graphDataCtor, xList, yList);
 
