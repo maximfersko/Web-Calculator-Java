@@ -12,8 +12,7 @@ public class CreditModelJNIWrapper {
 
     static {
         try {
-            String libraryPath = getLibraryPath(false);
-            System.load(libraryPath);
+            System.load(getLibraryPath(false));
         } catch (UnsatisfiedLinkError e) {
             log.error(e.getMessage());
         }

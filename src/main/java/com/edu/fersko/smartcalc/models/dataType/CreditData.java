@@ -1,9 +1,13 @@
 package com.edu.fersko.smartcalc.models.dataType;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class CreditData {
     private double totalPayment;
     private double monthlyPayment;
@@ -11,19 +15,4 @@ public class CreditData {
     private double minMonthlyPayment;
     private double maxMonthlyPayment;
     private double payments;
-
-    public CreditData(double totalPayment, double monthlyPayment, double overPayment,
-                      double minMonthlyPayment, double maxMonthlyPayment, double payments) {
-        this.totalPayment = totalPayment;
-        this.monthlyPayment = monthlyPayment;
-        this.overPayment = overPayment;
-        this.minMonthlyPayment = minMonthlyPayment;
-        this.maxMonthlyPayment = maxMonthlyPayment;
-        this.payments = payments;
-    }
-
-    public CreditData() {
-
-    }
-
 }
