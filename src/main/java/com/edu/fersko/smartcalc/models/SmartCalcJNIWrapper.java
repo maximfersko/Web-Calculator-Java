@@ -2,7 +2,7 @@ package com.edu.fersko.smartcalc.models;
 
 
 import com.edu.fersko.smartcalc.exceptions.NativeCalculationException;
-import com.edu.fersko.smartcalc.models.dataType.GraphData;
+import com.edu.fersko.smartcalc.models.type.GraphData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

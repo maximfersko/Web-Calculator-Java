@@ -1,9 +1,9 @@
 package com.edu.fersko.smartcalc.controller;
 
-import com.edu.fersko.smartcalc.models.SmartCalcJNIWrapper;
-import com.edu.fersko.smartcalc.models.dataType.GraphData;
+import com.edu.fersko.smartcalc.models.type.GraphData;
+import com.edu.fersko.smartcalc.service.GraphCalculatorService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,14 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@AllArgsConstructor
 @Slf4j
 public class GraphController {
-	private final SmartCalcJNIWrapper graphCore;
+	private final GraphCalculatorService graphBuilder;
 
-	@Autowired
-	public GraphController(SmartCalcJNIWrapper graphCore) {
-		this.graphCore = graphCore;
-	}
 
 	@PostMapping("/calculateGraph")
 	public ResponseEntity<GraphData> calculateGraph(
@@ -26,9 +23,7 @@ public class GraphController {
 			@RequestParam double xStart,
 			@RequestParam double xEnd) {
 		try {
-			double[] data = { xStart, xEnd };
-			GraphData graphData = graphCore.graphBuilder(data, expression);
-			return ResponseEntity.ok(graphData);
+			return ResponseEntity.ok(graphBuilder.calculateGraphPoints(xStart, xEnd,expression));
 		} catch (Exception e) {
 			log.error("Error while processing request: " + e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);

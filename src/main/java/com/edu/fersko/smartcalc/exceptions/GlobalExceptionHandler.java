@@ -1,6 +1,6 @@
 package com.edu.fersko.smartcalc.exceptions;
 
-import com.edu.fersko.smartcalc.models.dataType.ResultResponse;
+import com.edu.fersko.smartcalc.models.type.ResultResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

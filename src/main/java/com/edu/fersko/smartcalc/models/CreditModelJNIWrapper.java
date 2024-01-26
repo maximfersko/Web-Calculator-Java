@@ -1,6 +1,6 @@
 package com.edu.fersko.smartcalc.models;
 
-import com.edu.fersko.smartcalc.models.dataType.CreditData;
+import com.edu.fersko.smartcalc.models.type.CreditData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

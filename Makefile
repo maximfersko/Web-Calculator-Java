@@ -1,9 +1,9 @@
 CXX                            =   g++ -std=c++17
-SRC_CALCULATOR                 =   src/main/java/com/edu/fersko/smartcalc/models/wrapperCore/core
-SRC_WRAPPER_CORE               =   src/main/java/com/edu/fersko/smartcalc/models/wrapperCore
+SRC_CALCULATOR                 =   src/main/cpp/core
+SRC_WRAPPER_CORE               =   src/main/cpp
 WRAPPER_SMART_CALCULATOR_FILE  =   com_edu_fersko_smartcalc_models_SmartCalcJNIWrapper
 WRAPPER_CREDIT_CALCULATOR_FILE =   com_edu_fersko_smartcalc_models_CreditModelJNIWrapper
-PATH_LIB                       =   src/main/java/com/edu/fersko/smartcalc/models/lib
+PATH_LIB                       =   src/main/resources/lib
 SMART_CALCULATOR               =   smartCalculator
 CREDIT_CALCULATOR              =   creditCalculator
 JNI_INCLUDE_PATH               =   "C:\Program Files\Java\jdk-17\include"

@@ -1,7 +1,10 @@
 package com.edu.fersko.smartcalc.controller;
 
 import com.edu.fersko.smartcalc.models.CreditModelJNIWrapper;
-import com.edu.fersko.smartcalc.models.dataType.CreditData;
+import com.edu.fersko.smartcalc.models.type.CreditData;
+import com.edu.fersko.smartcalc.models.type.InputCreditData;
+import com.edu.fersko.smartcalc.service.CreditCalculatorService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,12 +14,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@AllArgsConstructor
 public class CreditController {
-	private final CreditModelJNIWrapper creditModelWrapper;
-
-	public CreditController() {
-		this.creditModelWrapper = new CreditModelJNIWrapper();
-	}
+	private final CreditCalculatorService creditCalculatorService;
 
 	@PostMapping("/calculateCredit")
 	public ResponseEntity<Map<String, Double>> calculateCredit(@RequestBody Map<String, String> requestBody) {
@@ -25,21 +25,13 @@ public class CreditController {
 		double interestRate = Double.parseDouble(requestBody.get("rate"));
 		String calcType = requestBody.get("calcType");
 
-		if (calcType.equals("annuity")) {
-			creditModelWrapper.annuity(loanAmount, loanTerm, interestRate);
-		} else if (calcType.equals("differentiated")) {
-			creditModelWrapper.deffirentated(loanAmount, interestRate, loanTerm);
-		}
+		InputCreditData inputCreditData = InputCreditData.builder()
+				.creditType(calcType)
+				.loanAmount(loanAmount)
+				.interestRate(interestRate)
+				.loanTerm(loanTerm)
+				.build();
 
-		CreditData data = creditModelWrapper.getResult();
-
-		Map<String, Double> responseData = new HashMap<>();
-		responseData.put("monthlyPayment", data.getMonthlyPayment());
-		responseData.put("overPayment", data.getOverPayment());
-		responseData.put("totalPayment", data.getTotalPayment());
-		responseData.put("maxMonthlyPayment", data.getMaxMonthlyPayment());
-		responseData.put("minMonthlyPayment", data.getMinMonthlyPayment());
-
-		return ResponseEntity.ok(responseData);
+		return ResponseEntity.ok(creditCalculatorService.calculateCredit(inputCreditData));
 	}
 }

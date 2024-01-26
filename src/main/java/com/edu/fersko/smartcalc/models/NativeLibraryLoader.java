@@ -5,7 +5,7 @@ import java.nio.file.Paths;
 
 public class NativeLibraryLoader {
 
-	private static final String LIB_PATH = "src/main/java/com/edu/fersko/smartcalc/models/lib/";
+	private static final String LIB_PATH = "src/main/resources/lib/";
 
 	private NativeLibraryLoader() {
 	}
