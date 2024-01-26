@@ -19,9 +19,9 @@ public class CreditModelJNIWrapperTest {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/creditAnnuity.csv")
 	public void testCreditAnnuity(double amount, int term, double rate,
-			double expectedMonthlyPayment,
-			double expectedOverPayment,
-			double expectedTotalPayment) {
+	                              double expectedMonthlyPayment,
+	                              double expectedOverPayment,
+	                              double expectedTotalPayment) {
 		creditCalculator.annuity(amount, term, rate);
 		assertEquals(expectedMonthlyPayment, creditCalculator.getResult().getMonthlyPayment(), DELTA);
 		assertEquals(expectedOverPayment, creditCalculator.getResult().getOverPayment(), DELTA);
@@ -31,9 +31,9 @@ public class CreditModelJNIWrapperTest {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/creditDiffenrented.csv")
 	public void testCreditDiffenrennted(double amount, int term, double rate,
-			double minExpectedMonthlyPayment, double maxExpectedMonthlyPayment,
-			double expectedOverPayment,
-			double expectedTotalPayment) {
+	                                    double minExpectedMonthlyPayment, double maxExpectedMonthlyPayment,
+	                                    double expectedOverPayment,
+	                                    double expectedTotalPayment) {
 		creditCalculator.deffirentated(amount, term, rate);
 		assertEquals(minExpectedMonthlyPayment, Math.round(creditCalculator.getResult().getMinMonthlyPayment()), DELTA);
 		assertEquals(maxExpectedMonthlyPayment, Math.round(creditCalculator.getResult().getMaxMonthlyPayment()), DELTA);

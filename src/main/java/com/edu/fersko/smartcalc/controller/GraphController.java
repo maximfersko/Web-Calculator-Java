@@ -23,7 +23,7 @@ public class GraphController {
 			@RequestParam double xStart,
 			@RequestParam double xEnd) {
 		try {
-			return ResponseEntity.ok(graphBuilder.calculateGraphPoints(xStart, xEnd,expression));
+			return ResponseEntity.ok(graphBuilder.calculateGraphPoints(xStart, xEnd, expression));
 		} catch (Exception e) {
 			log.error("Error while processing request: " + e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class SmartCalculatorServiceImpl implements SmartCalculatorService {
 	private SmartCalcJNIWrapper smartCalcJNIWrapper;
 	private HistoryService historyService;
+
 	@Override
 	public ResultResponse calculateExpression(String expression, double x) throws NativeCalculationException {
 		double result = smartCalcJNIWrapper.getResult(expression, x);

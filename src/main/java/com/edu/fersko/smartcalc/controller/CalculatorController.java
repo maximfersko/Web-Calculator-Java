@@ -1,11 +1,9 @@
 package com.edu.fersko.smartcalc.controller;
 
 import com.edu.fersko.smartcalc.exceptions.NativeCalculationException;
-import com.edu.fersko.smartcalc.models.SmartCalcJNIWrapper;
 import com.edu.fersko.smartcalc.models.type.ResultResponse;
 import com.edu.fersko.smartcalc.service.HistoryService;
 import com.edu.fersko.smartcalc.service.SmartCalculatorService;
-import com.edu.fersko.smartcalc.service.impl.HistoryServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -15,9 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 

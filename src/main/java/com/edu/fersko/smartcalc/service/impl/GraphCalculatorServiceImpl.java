@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class GraphCalculatorServiceImpl implements GraphCalculatorService {
 	private final SmartCalcJNIWrapper smartCalcJNIWrapper;
+
 	@Override
 	public GraphData calculateGraphPoints(double start, double end, String expression) {
 

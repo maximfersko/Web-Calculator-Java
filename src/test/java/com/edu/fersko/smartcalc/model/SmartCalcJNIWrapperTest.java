@@ -22,9 +22,9 @@ public class SmartCalcJNIWrapperTest {
 	@ParameterizedTest
 	@ValueSource(strings = {
 			"(15 / ( 7 - ( 1 + 1 ) ) * 3 - ( 2 + ( 1 + 1 ) ) * 15 / " +
-			"( 7 - ( 200 + 1 ) ) * 3 - ( 2 + ( 1 + 1 ) ) * ( 15 /" +
-			" ( 7 - ( 1 + 1 ) ) * 3 - ( 2 + ( 1 + 1 ) ) +  15 / " +
-			"( 7 - ( 1 + 1 ) ) * 3 - ( 2 + ( 1 + 1 ) ) ) * 100.072165)"
+					"( 7 - ( 200 + 1 ) ) * 3 - ( 2 + ( 1 + 1 ) ) * ( 15 /" +
+					" ( 7 - ( 1 + 1 ) ) * 3 - ( 2 + ( 1 + 1 ) ) +  15 / " +
+					"( 7 - ( 1 + 1 ) ) * 3 - ( 2 + ( 1 + 1 ) ) ) * 100.072165)"
 	})
 	public void calcWithBrackets(String expression) throws NativeCalculationException {
 		assertEquals(-3993., Math.round(rpn.getResult(expression, 0)), DELTA);

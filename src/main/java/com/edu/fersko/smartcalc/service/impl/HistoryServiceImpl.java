@@ -68,7 +68,7 @@ public class HistoryServiceImpl implements HistoryService {
 	public void loadHistory() {
 		try (BufferedReader reader = new BufferedReader(new FileReader(HISTORY_FILE_PATH))) {
 			String line;
-			while (( line = reader.readLine() ) != null) {
+			while ((line = reader.readLine()) != null) {
 				history.add(line);
 			}
 		} catch (IOException e) {

@@ -1,7 +1,5 @@
 package com.edu.fersko.smartcalc.controller;
 
-import com.edu.fersko.smartcalc.models.CreditModelJNIWrapper;
-import com.edu.fersko.smartcalc.models.type.CreditData;
 import com.edu.fersko.smartcalc.models.type.InputCreditData;
 import com.edu.fersko.smartcalc.service.CreditCalculatorService;
 import lombok.AllArgsConstructor;
@@ -10,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController
