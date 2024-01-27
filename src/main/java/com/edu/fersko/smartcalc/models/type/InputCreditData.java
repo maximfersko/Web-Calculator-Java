@@ -6,8 +6,8 @@ import lombok.Getter;
 @Builder
 @Getter
 public class InputCreditData {
-	double loanAmount;
-	int loanTerm;
-	double interestRate;
-	String creditType;
+	private double loanAmount;
+	private int loanTerm;
+	private double interestRate;
+	private String creditType;
 }
